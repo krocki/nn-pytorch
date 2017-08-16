@@ -1,6 +1,14 @@
 #!/bin/bash
+HOSTNAME=galileo
 
 for I in 1 2 3 4 5 .. 100
 do
-	python ptb-base.py --fname="ptb-base-h256-s25-lr01-tau.dat"
+    for S in 5 10 25 50
+	do
+	    for H in 16 32 64 100 256
+		do
+			FNAME="./logs/ptb/ptb-base-H$H-S$S-lr01-$HOSTNAME.dat"
+			python ptb-base.py --hidden=$H --seqlength=$S --fname=$FNAME
+		done
+	done
 done

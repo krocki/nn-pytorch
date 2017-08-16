@@ -9,14 +9,16 @@ import random
 ### parse args
 parser = argparse.ArgumentParser(description='')
 parser.add_argument('--fname', type=str, default = './logs/' + sys.argv[0] + '.dat', help='log filename')
-parser.add_argument('--batchsize', type=int, default = 16, help='batch size')
+parser.add_argument('--batchsize', type=int, default = 1, help='batch size')
+parser.add_argument('--hidden', type=int, default = 100, help='hiddens')
+parser.add_argument('--seqlength', type=int, default = 25, help='seqlength')
 
 opt = parser.parse_args()
 print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), sys.argv[0], opt)
 logname = opt.fname
 B = opt.batchsize
 
-last = time.time()
+start = time.time()
 with open(logname, "a") as myfile:
     entry = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), sys.argv[0], opt
     myfile.write("# " + str(entry))
@@ -31,8 +33,8 @@ char_to_ix = { ch:i for i,ch in enumerate(chars) }
 ix_to_char = { i:ch for i,ch in enumerate(chars) }
 
 # hyperparameters
-hidden_size = 256 # size of hidden layer of neurons
-seq_length = 25 # number of steps to unroll the RNN for
+hidden_size = opt.hidden # size of hidden layer of neurons
+seq_length = opt.seqlength # number of steps to unroll the RNN for
 learning_rate = 1e-1
 
 controller = {}
@@ -108,9 +110,10 @@ n, p = 0, 0
 mWxh, mWhh, mWhy = np.zeros_like(Wxh), np.zeros_like(Whh), np.zeros_like(Why)
 mbh, mby = np.zeros_like(bh), np.zeros_like(by) # memory variables for Adagrad
 smooth_loss = -np.log(1.0/vocab_size)*seq_length # loss at iteration 0
-last = time.time()
+start = time.time()
 
-t = time.time()-last
+t = time.time()-start
+last=start
 while t < 900:
   # prepare inputs (we're sweeping from left to right in steps seq_length long)
   if p+seq_length+1 >= len(data) or n == 0: 
@@ -128,9 +131,10 @@ while t < 900:
   # forward seq_length characters through the net and fetch gradient
   loss, dWxh, dWhh, dWhy, dbh, dby, hprev = lossFun(inputs, targets, hprev)
   smooth_loss = smooth_loss * 0.999 + loss * 0.001
-  if random.randint(0,100000) < 50:
-    now = time.time()
-    t = now-last
+  interval = time.time() - last
+  if random.uniform(0,5000) < interval:
+    last = time.time()
+    t = time.time()-start
     print(t, "Iteration", n, "Train loss:", smooth_loss)
     entry = '{:5}\t\t{:3f}\t{:3f}\n'.format(n, t, smooth_loss/seq_length)
     with open(logname, "a") as myfile:
