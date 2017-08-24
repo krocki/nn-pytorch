@@ -12,12 +12,14 @@ parser.add_argument('--fname', type=str, default = './logs/' + sys.argv[0] + '.d
 parser.add_argument('--batchsize', type=int, default = 1, help='batch size')
 parser.add_argument('--hidden', type=int, default = 64, help='hiddens')
 parser.add_argument('--seqlength', type=int, default = 25, help='seqlength')
+parser.add_argument('--timelimit', type=int, default = 100, help='time limit (s)')
 
 opt = parser.parse_args()
 print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), sys.argv[0], opt)
 logname = opt.fname
 B = opt.batchsize
 S = opt.seqlength
+T = opt.timelimit
 
 start = time.time()
 with open(logname, "a") as myfile:
@@ -64,8 +66,8 @@ def lossFun(inputs, targets, hprev):
     hs[t] = np.tanh(np.dot(Wxh, xs[t]) + np.dot(Whh, hs[t-1]) + bh) # hidden state
     ys[t] = np.dot(Why, hs[t]) + by # unnormalized log probabilities for next chars
     ps[t] = np.exp(ys[t]) / np.sum(np.exp(ys[t]), axis=0) # probabilities for next chars
-    for b in range(0,B):
-        loss += -np.log(ps[t][targets[t,b],b])/np.log(2) # softmax (cross-entropy loss)
+    #for b in range(0,B):
+    loss += -np.log(ps[t][targets[t,0],0])/np.log(2) # softmax (cross-entropy loss)
   # backward pass: compute gradients going backwards
   dWxh, dWhh, dWhy = np.zeros_like(Wxh), np.zeros_like(Whh), np.zeros_like(Why)
   dbh, dby = np.zeros_like(bh), np.zeros_like(by)
@@ -116,7 +118,7 @@ start = time.time()
 
 t = time.time()-start
 last=start
-while t < 100:
+while t < T:
   # prepare inputs (we're sweeping from left to right in steps seq_length long)
   for b in range(0,B):
       if p[b]+seq_length+1 >= len(data) or n == 0:

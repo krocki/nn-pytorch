@@ -3,7 +3,7 @@ HOSTNAME=macbook
 EXEC=ptb-batch.py
 PREFIX="./logs/ptb/ptb-batch"
 
-for I in 1 2 3 4 5 6 7 8 9 10
+for I in 1
 do
 	for B in 1 2 4 8 16 32 64 100
 	do

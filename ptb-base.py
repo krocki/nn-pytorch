@@ -10,13 +10,15 @@ import random
 parser = argparse.ArgumentParser(description='')
 parser.add_argument('--fname', type=str, default = './logs/' + sys.argv[0] + '.dat', help='log filename')
 parser.add_argument('--batchsize', type=int, default = 1, help='batch size')
-parser.add_argument('--hidden', type=int, default = 100, help='hiddens')
+parser.add_argument('--hidden', type=int, default = 64, help='hiddens')
 parser.add_argument('--seqlength', type=int, default = 25, help='seqlength')
+parser.add_argument('--timelimit', type=int, default = 100, help='time limit (s)')
 
 opt = parser.parse_args()
 print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), sys.argv[0], opt)
 logname = opt.fname
 B = opt.batchsize
+T = opt.timelimit
 
 start = time.time()
 with open(logname, "a") as myfile:
@@ -114,7 +116,7 @@ start = time.time()
 
 t = time.time()-start
 last=start
-while t < 900:
+while t < T:
   # prepare inputs (we're sweeping from left to right in steps seq_length long)
   if p+seq_length+1 >= len(data) or n == 0: 
     hprev = np.zeros((hidden_size,1)) # reset RNN memory
@@ -132,7 +134,7 @@ while t < 900:
   loss, dWxh, dWhh, dWhy, dbh, dby, hprev = lossFun(inputs, targets, hprev)
   smooth_loss = smooth_loss * 0.999 + loss * 0.001
   interval = time.time() - last
-  if random.uniform(0,5000) < interval:
+  if n % 100 == 0:
     last = time.time()
     t = time.time()-start
     print(t, "Iteration", n, "Train loss:", smooth_loss)
