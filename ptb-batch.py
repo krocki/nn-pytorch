@@ -110,6 +110,8 @@ n = 0
 p = np.random.randint(len(data)-1-S,size=(B)).tolist()
 _inputs = [[0] * S] * B
 _targets = [[0] * S] * B
+inputs = np.zeros((S,B), dtype=int)
+targets = np.zeros((S,B), dtype=int)
 hprev = np.zeros((hidden_size,B))
 mWxh, mWhh, mWhy = np.zeros_like(Wxh), np.zeros_like(Whh), np.zeros_like(Why)
 mbh, mby = np.zeros_like(bh), np.zeros_like(by) # memory variables for Adagrad
@@ -126,11 +128,15 @@ while t < T:
         p[b] = np.random.randint(len(data)-1-S)
         print p[b]
 
-      _inputs[b] = [char_to_ix[ch] for ch in data[p[b]:p[b]+seq_length]]
-      _targets[b] = [char_to_ix[ch] for ch in data[p[b]+1:p[b]+seq_length+1]]
+      inputs[:,b] = [char_to_ix[ch] for ch in data[p[b]:p[b]+seq_length]]
+      targets[:,b] = [char_to_ix[ch] for ch in data[p[b]+1:p[b]+seq_length+1]]
 
-  inputs = np.asarray(_inputs).T
-  targets = np.asarray(_targets).T
+   # print inputs
+   #  [[41 20 27  0]
+   #  [ 1 43 42  1]
+   #  [26 38  1 45]
+   #  [43 33 25 32]
+   #  [44 21 37 27]]
 
   # sample from the model now and then
   if n % 1000 == 0:
