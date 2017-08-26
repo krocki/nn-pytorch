@@ -1,0 +1,2117 @@
+# ('2017-08-16 10:42:41', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.018451	3.913755
+ 1000		2.238849	3.812588
+ 2000		4.436706	3.464178
+ 3000		6.631599	3.177052
+ 4000		8.806126	3.024558
+# ('2017-08-16 10:43:23', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.019810	3.913755
+  200		0.477203	4.151576
+  400		0.921766	4.148887
+  600		1.368158	4.080421
+  800		1.814919	3.996567
+ 1000		2.255461	3.914145
+# ('2017-08-16 10:45:58', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 10:48:23', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 10:48:48', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 10:49:30', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 10:50:16', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 10:50:35', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 10:51:18', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 10:51:53', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 10:52:35', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 10:53:09', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 10:53:22', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 10:54:05', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 10:54:46', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 10:55:35', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 10:57:55', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 10:59:00', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 10:59:26', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 11:19:38', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 11:19:57', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 11:20:18', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 11:20:33', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 11:21:01', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 11:21:20', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 11:22:09', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 11:22:22', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 11:23:01', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 11:23:53', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 11:25:15', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 11:25:35', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 11:25:48', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 11:26:04', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 11:26:50', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 23:01:29', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-16 23:02:57', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:03:10', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:08:30', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:08:41', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:09:27', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:09:44', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:10:22', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:10:42', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:11:19', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:11:28', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:11:48', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:12:03', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:13:07', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:13:20', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:13:35', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:13:42', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:14:17', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:14:33', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:14:47', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:15:00', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:16:41', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:16:50', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:17:14', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:18:17', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:18:33', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:19:13', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:19:46', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:20:09', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:20:25', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:21:08', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:23:06', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:23:19', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:23:57', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:24:26', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:24:39', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:24:53', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:26:02', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:26:50', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:27:09', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:27:32', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:27:47', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:28:08', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:28:24', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:28:45', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:29:03', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:29:30', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:30:24', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:30:53', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:32:32', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:32:44', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:33:06', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:33:30', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:34:09', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:34:19', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:35:39', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:36:40', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:36:57', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:38:47', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:39:27', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:39:41', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:40:54', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=10))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-17 21:42:24', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+  805		1.830791	4.099469
+# ('2017-08-18 13:12:16', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+  771		1.721105	4.048724
+# ('2017-08-18 19:59:39', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 19:59:44', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+ 1604		3.584602	3.700266
+ 4457		9.910524	3.121781
+ 6986		15.746662	3.012420
+# ('2017-08-18 20:00:05', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:02:13', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:02:21', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:02:36', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:02:47', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:03:01', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:04:05', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:04:26', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:04:56', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:06:25', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:06:46', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:07:33', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:07:54', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:08:14', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:08:29', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:08:37', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:09:18', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:09:40', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:10:02', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:10:14', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:11:54', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:12:06', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:12:18', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:13:03', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:13:10', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:13:37', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:14:22', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:14:34', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:15:24', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:15:45', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:16:02', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:16:12', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:17:18', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:17:59', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:19:37', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:20:00', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:20:44', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:20:52', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:21:14', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:22:02', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:22:09', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:22:21', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:22:38', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:22:54', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:23:02', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:23:27', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:23:43', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:23:58', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+ 2386		8.920413	nan
+ 3399		12.586212	nan
+ 5133		18.829668	nan
+# ('2017-08-18 20:25:02', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+  897		2.709843	4.144216
+ 3297		9.859599	3.406190
+ 4069		12.161911	3.288007
+ 5268		15.721042	3.274382
+ 5421		16.174893	3.271803
+ 6937		20.718846	3.196192
+# ('2017-08-18 20:25:47', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.019331	3.913755
+ 1000		2.953230	4.148463
+ 2000		5.875600	3.807449
+ 3000		8.784931	3.455849
+ 4000		11.734555	3.291762
+ 5000		14.670324	3.260077
+ 6000		17.651288	3.204097
+ 7000		20.604441	3.146211
+# ('2017-08-18 20:26:39', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.023171	3.913755
+  100		0.279554	4.017646
+  200		0.533159	4.033650
+  300		0.783038	4.025085
+  400		1.036394	3.984183
+  500		1.287700	3.943778
+  600		1.539227	3.907509
+  700		1.793093	3.873680
+  800		2.045902	3.823998
+  900		2.306185	3.790555
+ 1000		2.570636	3.751493
+ 1100		2.816306	3.713692
+ 1200		3.075748	3.679619
+ 1300		3.319338	3.635926
+ 1400		3.571314	3.601166
+ 1500		3.824604	3.581829
+ 1600		4.076024	3.553139
+ 1700		4.320176	3.526935
+ 1800		4.573846	3.495411
+ 1900		4.829535	3.471155
+ 2000		5.080397	3.443028
+ 2100		5.331590	3.406670
+# ('2017-08-18 20:27:11', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.018755	3.913755
+  100		0.252559	4.034292
+  200		0.482927	4.084143
+  300		0.719644	4.120654
+  400		0.952353	4.142260
+  500		1.189220	4.140114
+  600		1.432240	4.119613
+  700		1.667431	4.092997
+  800		1.904527	4.044067
+  900		2.138497	4.005588
+ 1000		2.378229	3.961407
+ 1100		2.615718	3.915930
+ 1200		2.857296	3.867510
+ 1300		3.094678	3.812619
+# ('2017-08-18 20:27:15', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.019413	3.914755
+  100		0.302015	4.204180
+  200		0.590564	4.432578
+  300		0.877225	4.766830
+  400		1.155671	5.067780
+  500		1.431567	5.362514
+# ('2017-08-18 20:27:57', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:28:08', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-18 20:28:25', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.020683	3.913755
+  100		0.307619	4.025305
+  200		0.597377	4.055224
+  300		0.877490	4.064976
+  400		1.162174	4.040947
+  500		1.451755	4.009097
+  600		1.743820	3.979718
+  700		2.037680	3.950062
+  800		2.316806	3.902338
+  900		2.616919	3.868673
+ 1000		2.913512	3.831133
+ 1100		3.200969	3.793713
+ 1200		3.490564	3.755064
+# ('2017-08-18 20:28:30', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.019204	3.913755
+  100		0.319708	4.013904
+  200		0.628622	4.011178
+  300		0.937291	3.983635
+  400		1.235920	3.923246
+  500		1.534431	3.870793
+  600		1.829848	3.826016
+  700		2.139083	3.782990
+  800		2.436368	3.739880
+  900		2.739417	3.698242
+ 1000		3.037553	3.646180
+ 1100		3.329731	3.597961
+ 1200		3.632263	3.555612
+ 1300		3.924657	3.510845
+ 1400		4.222724	3.466279
+ 1500		4.521124	3.443738
+ 1600		4.820007	3.412250
+ 1700		5.115389	3.382148
+ 1800		5.412069	3.343984
+ 1900		5.718379	3.314528
+ 2000		6.026017	3.276757
+ 2100		6.321974	3.237722
+ 2200		6.634034	3.188330
+ 2300		6.931419	3.150415
+ 2400		7.235771	3.133193
+ 2500		7.540502	3.113372
+ 2600		7.838486	3.078287
+ 2700		8.138102	3.050638
+ 2800		8.447051	3.040418
+ 2900		8.744172	3.032363
+ 3000		9.046964	3.018767
+ 3100		9.349356	3.006866
+ 3200		9.655880	2.995238
+ 3300		9.956094	2.974727
+ 3400		10.262558	2.964925
+ 3500		10.568069	2.950513
+ 3600		10.867079	2.936831
+ 3700		11.159205	2.929548
+ 3800		11.457600	2.908198
+ 3900		11.765253	2.888363
+ 4000		12.061474	2.870494
+ 4100		12.362313	2.865455
+ 4200		12.656682	2.860906
+ 4300		12.956151	2.872080
+ 4400		13.256030	2.880791
+ 4500		13.556986	2.886782
+ 4600		13.847879	2.883248
+ 4700		14.145747	2.878137
+ 4800		14.447973	2.873320
+ 4900		14.738326	2.869057
+ 5000		15.037778	2.862126
+ 5100		15.335176	2.851941
+ 5200		15.639536	2.853734
+ 5300		15.948427	2.855741
+ 5400		16.255016	2.862695
+ 5500		16.553599	2.852688
+ 5600		16.850836	2.854326
+ 5700		17.146144	2.850491
+ 5800		17.454372	2.848327
+ 5900		17.754377	2.831626
+ 6000		18.053887	2.827837
+ 6100		18.346846	2.795690
+ 6200		18.661688	2.768366
+ 6300		18.962711	2.756937
+# ('2017-08-18 20:28:52', 'ptb-batch.py', Namespace(batchsize=16, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.020748	3.913755
+  100		0.499332	4.016447
+  200		0.974528	4.011381
+  300		1.450226	3.986377
+  400		1.912870	3.932643
+  500		2.389315	3.886267
+  600		2.854720	3.847735
+  700		3.327702	3.810384
+  800		3.800438	3.752719
+  900		4.277149	3.718392
+ 1000		4.751650	3.675246
+ 1100		5.228644	3.637880
+ 1200		5.700913	3.605509
+ 1300		6.177447	3.567110
+ 1400		6.654880	3.530209
+ 1500		7.124322	3.512708
+ 1600		7.599468	3.489512
+ 1700		8.082211	3.464205
+ 1800		8.565210	3.438562
+ 1900		9.036100	3.415607
+ 2000		9.505575	3.386245
+ 2100		9.980571	3.355483
+ 2200		10.460463	3.309868
+ 2300		10.937060	3.272605
+ 2400		11.417047	3.258191
+ 2500		11.893200	3.242003
+ 2600		12.361586	3.209074
+ 2700		12.839793	3.181442
+ 2800		13.313873	3.172367
+ 2900		13.793478	3.165160
+ 3000		14.270650	3.154733
+ 3100		14.746266	3.147035
+ 3200		15.221512	3.141104
+ 3300		15.691920	3.124707
+ 3400		16.164949	3.115870
+ 3500		16.628739	3.103917
+ 3600		17.097852	3.094999
+ 3700		17.569641	3.093037
+ 3800		18.050113	3.074754
+ 3900		18.523843	3.056481
+ 4000		18.990812	3.038852
+ 4100		19.478900	3.034989
+ 4200		19.983760	3.034504
+ 4300		20.453499	3.047019
+ 4400		20.933250	3.059747
+ 4500		21.402874	3.065623
+ 4600		21.882331	3.062940
+ 4700		22.340782	3.057417
+ 4800		22.805153	3.056060
+ 4900		23.281516	3.053091
+ 5000		23.756453	3.048797
+ 5100		24.232426	3.040066
+ 5200		24.709641	3.042048
+ 5300		25.182242	3.043386
+ 5400		25.672557	3.046964
+ 5500		26.161978	3.036021
+ 5600		26.623179	3.039009
+ 5700		27.098005	3.037028
+ 5800		27.571200	3.037110
+ 5900		28.044907	3.023464
+ 6000		28.516245	3.022030
+ 6100		28.990714	2.992555
+ 6200		29.463532	2.963724
+ 6300		29.936121	2.952362
+# ('2017-08-18 20:29:23', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.017944	3.913755
+  100		0.237498	4.020178
+  200		0.462016	4.040495
+  300		0.686324	4.037046
+  400		0.907449	3.999962
+  500		1.134223	3.958782
+  600		1.356441	3.922821
+  700		1.583368	3.890641
+  800		1.808342	3.841134
+  900		2.024894	3.806058
+ 1000		2.238626	3.769076
+ 1100		2.468119	3.731951
+ 1200		2.687734	3.696785
+ 1300		2.915106	3.654422
+ 1400		3.134557	3.619816
+ 1500		3.358319	3.602233
+ 1600		3.583224	3.575909
+ 1700		3.798866	3.547673
+ 1800		4.014020	3.516188
+ 1900		4.228969	3.492084
+ 2000		4.454782	3.464118
+ 2100		4.676281	3.428020
+ 2200		4.896155	3.372016
+ 2300		5.124310	3.332273
+ 2400		5.352005	3.314661
+ 2500		5.574498	3.294116
+ 2600		5.793699	3.256173
+ 2700		6.014990	3.222177
+# ('2017-08-18 20:29:45', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.018717	3.913755
+  100		0.242408	4.015750
+  200		0.474011	4.010987
+  300		0.707421	3.983910
+  400		0.933806	3.926301
+  500		1.159315	3.877782
+  600		1.385697	3.834364
+  700		1.613134	3.792583
+  800		1.843825	3.729421
+  900		2.076098	3.690029
+ 1000		2.310399	3.641141
+ 1100		2.547563	3.600145
+ 1200		2.782418	3.559029
+ 1300		3.019320	3.515153
+ 1400		3.254533	3.473167
+ 1500		3.473759	3.450235
+ 1600		3.702487	3.418696
+ 1700		3.935690	3.387710
+ 1800		4.167283	3.353961
+ 1900		4.403107	3.327818
+ 2000		4.645515	3.290666
+ 2100		4.876681	3.253842
+ 2200		5.104192	3.204690
+ 2300		5.329866	3.165407
+ 2400		5.564978	3.148982
+ 2500		5.799064	3.129958
+ 2600		6.033318	3.093659
+ 2700		6.256550	3.065276
+ 2800		6.478006	3.054827
+ 2900		6.700298	3.046427
+ 3000		6.929079	3.031377
+ 3100		7.168046	3.019259
+ 3200		7.399135	3.009245
+ 3300		7.627406	2.988875
+ 3400		7.853614	2.979324
+ 3500		8.083211	2.964870
+ 3600		8.312870	2.954257
+ 3700		8.537105	2.947886
+ 3800		8.767468	2.926309
+ 3900		8.995629	2.909199
+# ('2017-08-18 20:30:02', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.050429	3.913755
+  100		0.272328	4.013475
+  200		0.499875	4.042575
+  300		0.717586	4.041588
+  400		0.941915	4.002843
+  500		1.165654	3.966868
+  600		1.388951	3.931109
+  700		1.612178	3.896671
+  800		1.835670	3.843994
+  900		2.073023	3.811227
+ 1000		2.338919	3.772699
+ 1100		2.572929	3.736405
+ 1200		2.798605	3.701178
+ 1300		3.030734	3.658586
+ 1400		3.255938	3.622744
+ 1500		3.484223	3.603027
+ 1600		3.715030	3.579247
+ 1700		3.944074	3.548517
+ 1800		4.165077	3.518588
+ 1900		4.389855	3.493012
+ 2000		4.649707	3.462293
+ 2100		4.883272	3.426391
+ 2200		5.108330	3.376975
+ 2300		5.340761	3.334505
+ 2400		5.566464	3.318754
+ 2500		5.787933	3.299894
+ 2600		6.015130	3.261769
+ 2700		6.235830	3.231116
+ 2800		6.456518	3.223134
+ 2900		6.683259	3.215184
+ 3000		6.953248	3.200516
+ 3100		7.188797	3.192848
+ 3200		7.424569	3.188681
+ 3300		7.648636	3.170722
+ 3400		7.872549	3.156998
+ 3500		8.099871	3.142137
+ 3600		8.331807	3.131105
+ 3700		8.568036	3.124063
+ 3800		8.800659	3.104246
+ 3900		9.028022	3.084287
+ 4000		9.311340	3.064388
+ 4100		9.542692	3.058743
+ 4200		9.763324	3.053316
+ 4300		9.986359	3.065097
+ 4400		10.213177	3.074625
+ 4500		10.435606	3.079812
+ 4600		10.670213	3.078655
+ 4700		10.895349	3.075872
+ 4800		11.118575	3.072109
+ 4900		11.352862	3.069961
+ 5000		11.629194	3.066147
+ 5100		11.855298	3.060840
+ 5200		12.080957	3.061006
+ 5300		12.303245	3.062380
+ 5400		12.521433	3.066787
+ 5500		12.748105	3.055269
+ 5600		12.974862	3.059798
+ 5700		13.196885	3.059337
+ 5800		13.421334	3.058577
+ 5900		13.645131	3.042842
+ 6000		13.907293	3.039516
+ 6100		14.134944	3.003357
+ 6200		14.363885	2.970496
+ 6300		14.598859	2.955930
+ 6400		14.835164	2.968957
+ 6500		15.063802	2.970211
+ 6600		15.302354	2.975290
+ 6700		15.530904	2.993152
+# ('2017-08-18 20:30:19', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.053842	3.913755
+  100		0.346914	4.009614
+  200		0.640705	4.045072
+  300		0.931888	4.064029
+  400		1.216229	4.060835
+  500		1.506156	4.046466
+  600		1.805835	4.025459
+  700		2.096860	4.002429
+  800		2.394535	3.956160
+  900		2.696451	3.921053
+ 1000		3.040165	3.879401
+ 1100		3.325323	3.839368
+ 1200		3.628049	3.798543
+ 1300		3.920502	3.750017
+ 1400		4.215271	3.709893
+ 1500		4.511169	3.683697
+ 1600		4.800422	3.651331
+ 1700		5.097030	3.617841
+ 1800		5.401174	3.579766
+ 1900		5.686383	3.550404
+ 2000		6.036529	3.517875
+ 2100		6.333832	3.479561
+ 2200		6.628847	3.421357
+ 2300		6.920393	3.377047
+ 2400		7.214773	3.354188
+ 2500		7.495553	3.329606
+ 2600		7.793734	3.289870
+ 2700		8.088356	3.254194
+ 2800		8.383032	3.244420
+ 2900		8.668403	3.232838
+ 3000		9.025719	3.217259
+ 3100		9.324026	3.206451
+ 3200		9.606766	3.201339
+ 3300		9.902519	3.180547
+ 3400		10.187816	3.169515
+ 3500		10.481555	3.154964
+ 3600		10.780269	3.146847
+ 3700		11.066650	3.142543
+ 3800		11.353031	3.124005
+ 3900		11.653288	3.103051
+ 4000		11.999799	3.080246
+ 4100		12.294607	3.073176
+ 4200		12.585671	3.069324
+ 4300		12.876299	3.076755
+ 4400		13.174515	3.087231
+ 4500		13.460443	3.089290
+ 4600		13.752796	3.087280
+ 4700		14.056794	3.082743
+ 4800		14.352928	3.077751
+ 4900		14.646470	3.076457
+ 5000		14.987461	3.071509
+ 5100		15.279306	3.065729
+ 5200		15.575570	3.066114
+ 5300		15.869372	3.066983
+ 5400		16.169196	3.070016
+ 5500		16.456428	3.055333
+ 5600		16.745873	3.056373
+ 5700		17.038154	3.055755
+ 5800		17.328356	3.056055
+ 5900		17.610581	3.038720
+ 6000		17.956628	3.033532
+ 6100		18.246074	2.996838
+ 6200		18.540487	2.965260
+ 6300		18.841915	2.949315
+ 6400		19.142589	2.961352
+ 6500		19.447877	2.967851
+ 6600		19.735693	2.972647
+ 6700		20.022635	2.989332
+ 6800		20.320165	2.995579
+ 6900		20.613657	2.994375
+ 7000		20.949043	2.989007
+ 7100		21.237066	2.991614
+ 7200		21.527192	2.983354
+ 7300		21.823159	2.981630
+ 7400		22.122752	2.985695
+ 7500		22.420979	2.977752
+ 7600		22.719899	2.980952
+ 7700		23.016093	2.975733
+ 7800		23.305754	2.967354
+ 7900		23.595904	2.938183
+ 8000		23.929782	2.906845
+ 8100		24.213320	2.894122
+ 8200		24.511955	2.902706
+ 8300		24.808057	2.903670
+ 8400		25.098529	2.914281
+ 8500		25.401860	2.922397
+ 8600		25.687291	2.909525
+ 8700		25.980724	2.914844
+ 8800		26.271080	2.914776
+ 8900		26.565489	2.903758
+ 9000		26.897606	2.893930
+ 9100		27.190948	2.898964
+ 9200		27.483774	2.899453
+ 9300		27.769295	2.896751
+ 9400		28.064287	2.909798
+ 9500		28.365369	2.910954
+ 9600		28.658032	2.910891
+ 9700		28.953621	2.912900
+ 9800		29.238457	2.900949
+ 9900		29.533300	2.905050
+10000		29.869961	2.908070
+10100		30.163151	2.906939
+10200		30.447950	2.904543
+10300		30.742069	2.903628
+10400		31.041620	2.899642
+10500		31.338288	2.892928
+10600		31.624793	2.898886
+10700		31.919070	2.906131
+10800		32.207683	2.912837
+10900		32.497813	2.913149
+11000		32.837385	2.918764
+11100		33.129536	2.904829
+11200		33.427519	2.879398
+11300		33.719453	2.860559
+11400		34.015321	2.839681
+11500		34.316859	2.847713
+11600		34.620584	2.849159
+11700		34.912867	2.853070
+11800		35.208674	2.855586
+11900		35.506221	2.862563
+12000		35.849230	2.856826
+12100		36.141052	2.855993
+# ('2017-08-24 10:11:43', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.061847	3.913755
+  100		0.363791	4.007591
+  200		0.658662	4.035244
+  300		0.956618	4.036585
+  400		1.258739	3.996100
+  500		1.560345	3.952490
+  600		1.862904	3.911536
+  700		2.159501	3.871739
+  800		2.459518	3.813756
+  900		2.760687	3.774882
+ 1000		3.098334	3.727902
+ 1100		3.402063	3.686409
+ 1200		3.699358	3.646841
+ 1300		4.006620	3.603296
+ 1400		4.313291	3.562334
+ 1500		4.606944	3.539162
+ 1600		4.904749	3.511682
+ 1700		5.216358	3.481301
+ 1800		5.514049	3.447837
+ 1900		5.814063	3.420547
+ 2000		6.155936	3.386433
+ 2100		6.461196	3.350805
+ 2200		6.759605	3.298935
+ 2300		7.055074	3.256911
+ 2400		7.355887	3.240323
+# ('2017-08-24 10:13:49', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.053270	3.913755
+  100		0.368363	4.016502
+  200		0.676438	4.009745
+  300		0.995287	3.983967
+  400		1.308627	3.928543
+  500		1.619142	3.881227
+  600		1.931499	3.841371
+  700		2.245998	3.804883
+  800		2.553737	3.749824
+  900		2.867570	3.713684
+# ('2017-08-24 10:14:22', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:14:44', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:14:56', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.057928	3.913755
+  100		0.370958	4.006703
+  200		0.683254	4.029743
+# ('2017-08-24 10:15:38', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.544823	3.913755
+# ('2017-08-24 10:20:18', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:20:33', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:20:56', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:23:47', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.555953	3.913755
+# ('2017-08-24 10:24:15', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.052466	3.913755
+  100		0.383345	4.004497
+  200		0.683106	3.996469
+# ('2017-08-24 10:26:26', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:27:46', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:27:55', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:28:40', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:29:14', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:29:47', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:30:40', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:31:39', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:32:22', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:32:34', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:33:00', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:33:58', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:38:12', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:38:38', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.053827	3.913755
+  100		0.372229	4.040005
+  200		0.684531	4.078141
+  300		0.995139	4.093312
+# ('2017-08-24 10:39:46', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:40:09', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.058467	3.913755
+# ('2017-08-24 10:40:18', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:40:51', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.052931	3.913754
+# ('2017-08-24 10:41:12', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.050617	3.913755
+  100		0.374123	4.018943
+  200		0.679636	4.014175
+  300		0.980914	3.985801
+  400		1.284827	3.928125
+  500		1.590145	3.876676
+  600		1.895043	3.833918
+  700		2.203474	3.792368
+  800		2.511182	3.734093
+  900		2.822811	3.696135
+ 1000		3.176810	3.648338
+ 1100		3.476484	3.605974
+# ('2017-08-24 10:42:24', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.051760	3.913755
+  100		0.380376	4.004323
+  200		0.688125	4.020056
+  300		0.995017	4.003294
+  400		1.297844	3.954390
+# ('2017-08-24 10:43:17', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:43:44', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:44:25', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:44:54', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:46:13', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:49:40', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:51:17', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:51:26', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:51:55', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:52:36', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:53:27', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.059894	3.913755
+# ('2017-08-24 10:54:21', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.051432	3.913755
+  100		0.502770	4.018484
+  200		0.930028	4.028758
+  300		1.360538	4.008507
+  400		1.784699	3.952769
+  500		2.217055	3.904653
+  600		2.645131	3.862090
+  700		3.072010	3.824012
+# ('2017-08-24 10:54:36', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.058063	3.913755
+  100		0.408702	4.025205
+  200		0.745957	4.069237
+  300		1.086323	4.089713
+  400		1.429404	4.069393
+  500		1.771844	4.036237
+  600		2.123288	4.000119
+  700		2.469673	3.965097
+  800		2.812643	3.907172
+  900		3.156739	3.866059
+ 1000		3.546783	3.821536
+ 1100		3.890713	3.782474
+ 1200		4.232862	3.742066
+ 1300		4.575594	3.694623
+ 1400		4.913700	3.655605
+ 1500		5.258887	3.631200
+ 1600		5.606745	3.600676
+ 1700		5.953099	3.568420
+ 1800		6.311699	3.533083
+ 1900		6.657519	3.504105
+ 2000		7.045576	3.469164
+ 2100		7.388166	3.430876
+ 2200		7.735470	3.375000
+ 2300		8.087185	3.330785
+# ('2017-08-24 10:56:26', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:57:02', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.055566	3.913755
+  100		0.517467	4.004342
+  200		0.955205	3.991810
+  300		1.394829	3.961036
+  400		1.824053	3.900629
+  500		2.260581	3.843829
+  600		2.693893	3.798215
+# ('2017-08-24 10:57:16', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.059878	3.913755
+  100		0.409059	4.010218
+  200		0.738993	3.994757
+# ('2017-08-24 10:57:18', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.054297	3.913755
+# ('2017-08-24 10:57:38', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 10:58:28', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.065454	3.913755
+  100		0.408014	4.004085
+  200		0.733191	3.999993
+  300		1.056772	3.971357
+  400		1.391957	3.910629
+# ('2017-08-24 10:58:31', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.054406	3.913755
+# ('2017-08-24 10:58:55', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.054768	3.913755
+  100		0.392381	4.010774
+# ('2017-08-24 10:59:16', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.051269	3.913755
+  100		0.380562	4.012278
+  200		0.721148	4.051258
+# ('2017-08-24 10:59:29', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.056880	3.913755
+  100		0.403186	4.016624
+  200		0.732455	4.027753
+# ('2017-08-24 10:59:45', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.053344	3.913755
+  100		0.404176	4.017769
+  200		0.751005	4.052983
+  300		1.095818	4.065698
+  400		1.441009	4.035384
+  500		1.792084	3.997194
+  600		2.131446	3.960266
+  700		2.472398	3.924109
+  800		2.814099	3.869162
+# ('2017-08-24 11:00:09', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.053078	3.913755
+  100		0.486108	4.019883
+# ('2017-08-24 11:00:15', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.058863	3.913754
+  100		0.513324	4.013717
+# ('2017-08-24 11:00:25', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.061446	3.913755
+  100		0.536906	4.007937
+# ('2017-08-24 11:00:46', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.058709	3.913755
+# ('2017-08-24 11:00:56', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.051093	3.913755
+  100		0.385489	4.005396
+# ('2017-08-24 11:01:06', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.054454	3.913754
+  100		0.379963	4.016356
+  200		0.708050	4.022167
+  300		1.038932	4.005329
+  400		1.369549	3.956280
+  500		1.704390	3.912049
+  600		2.044440	3.872587
+  700		2.365834	3.837109
+  800		2.700396	3.783782
+  900		3.034850	3.749129
+ 1000		3.409632	3.708308
+ 1100		3.734366	3.669761
+ 1200		4.067387	3.634792
+ 1300		4.409248	3.592415
+# ('2017-08-24 11:01:49', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.053388	3.913755
+  100		0.383911	4.015187
+# ('2017-08-24 11:02:24', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 11:03:17', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.055622	3.913755
+  100		0.392218	4.089780
+  200		0.713856	4.246004
+# ('2017-08-24 11:03:21', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.052993	3.913754
+  100		0.376200	4.119763
+# ('2017-08-24 11:03:44', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.058304	3.913755
+# ('2017-08-24 11:03:55', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.057856	3.913755
+  100		0.419941	4.126904
+# ('2017-08-24 11:04:01', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.057215	3.913755
+  100		0.406361	4.129295
+  200		0.755580	4.297999
+  300		1.104162	4.543267
+  400		1.457322	4.851308
+  500		1.801097	5.122182
+  600		2.148568	5.423144
+  700		2.492429	5.712051
+  800		2.834128	5.984818
+  900		3.180184	6.293001
+ 1000		3.562581	6.661225
+ 1100		3.909395	6.921611
+ 1200		4.249136	7.213881
+ 1300		4.583085	7.606379
+ 1400		4.926224	7.969179
+ 1500		5.259317	8.201376
+ 1600		5.607633	8.379810
+ 1700		5.950902	8.483175
+ 1800		6.292518	8.708416
+ 1900		6.638285	9.229911
+ 2000		7.022243	9.368302
+ 2100		7.375250	9.495636
+ 2200		7.716102	9.620479
+ 2300		8.054384	9.778788
+ 2400		8.400169	9.990404
+ 2500		8.750579	10.311056
+ 2600		9.086359	10.482701
+ 2700		9.427277	10.449989
+ 2800		9.769230	10.419699
+ 2900		10.114486	10.750540
+ 3000		10.501559	10.990042
+ 3100		10.841942	11.199994
+# ('2017-08-24 11:04:18', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.054303	3.913755
+  100		0.389459	4.104377
+  200		0.722076	4.303128
+  300		1.047079	4.535018
+  400		1.384467	4.755906
+  500		1.719435	4.944381
+  600		2.057872	5.134788
+  700		2.389322	5.480259
+  800		2.715139	5.685500
+  900		3.044214	5.854234
+ 1000		3.425851	6.180037
+ 1100		3.743881	6.390344
+ 1200		4.083333	6.772692
+ 1300		4.414821	6.931739
+ 1400		4.742353	7.189957
+ 1500		5.082974	7.394150
+ 1600		5.409942	7.508037
+ 1700		5.739673	7.711543
+# ('2017-08-24 11:04:35', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.053095	3.913755
+  100		0.392224	4.116763
+  200		0.726979	4.352027
+  300		1.063737	4.592834
+  400		1.401245	4.898079
+  500		1.726418	5.084784
+  600		2.059339	5.364936
+  700		2.396974	5.692804
+# ('2017-08-24 11:04:55', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.054245	3.913755
+# ('2017-08-24 11:05:40', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.066319	3.913755
+  100		0.522222	4.150232
+# ('2017-08-24 11:06:00', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.052449	3.908562
+  100		0.188422	3.627466
+  200		0.345037	3.439653
+  300		0.479768	3.318131
+  400		0.615741	3.232497
+# ('2017-08-24 11:06:05', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.050086	3.908563
+  100		0.187080	3.619168
+  200		0.317966	3.416968
+  300		0.453324	3.294434
+  400		0.585709	3.224010
+  500		0.718715	3.187232
+  600		0.855634	3.178274
+  700		0.992033	3.181494
+  800		1.127157	3.214523
+  900		1.259518	3.268559
+ 1000		1.444848	3.333068
+ 1100		1.582310	3.376135
+ 1200		1.720602	3.497708
+ 1300		1.853171	3.584851
+ 1400		1.987035	3.682769
+ 1500		2.124805	3.774581
+ 1600		2.257098	3.887770
+ 1700		2.391807	3.993905
+ 1800		2.524904	4.131427
+ 1900		2.657700	4.295149
+ 2000		2.837958	4.434380
+ 2100		2.971580	4.597649
+ 2200		3.108410	4.714395
+ 2300		3.239289	4.836619
+ 2400		3.371909	4.929801
+ 2500		3.505804	5.055993
+ 2600		3.641774	5.206229
+ 2700		3.777961	5.327236
+ 2800		3.913538	5.459436
+ 2900		4.046407	5.621111
+ 3000		4.227881	5.768785
+ 3100		4.358956	5.883053
+ 3200		4.491859	5.952751
+ 3300		4.623100	6.112315
+ 3400		4.758302	6.247993
+ 3500		4.896948	6.343258
+ 3600		5.030352	nan
+ 3700		5.164420	nan
+ 3800		5.297021	nan
+ 3900		5.427453	nan
+ 4000		5.606523	nan
+ 4100		5.733537	nan
+ 4200		5.866413	nan
+ 4300		5.995942	nan
+ 4400		6.127876	nan
+ 4500		6.263017	nan
+# ('2017-08-24 11:06:18', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.051039	3.908562
+  100		0.103555	3.635154
+  200		0.159269	3.449033
+  300		0.215490	3.329376
+  400		0.269949	3.251164
+  500		0.320517	3.193955
+  600		0.372941	3.167898
+  700		0.422937	3.175530
+  800		0.478842	3.203598
+  900		0.528799	3.227530
+ 1000		0.626095	3.296444
+ 1100		0.677176	3.370445
+ 1200		0.727515	3.444508
+ 1300		0.780461	3.565446
+ 1400		0.836205	3.730174
+ 1500		0.889713	3.836715
+ 1600		0.945440	3.941122
+ 1700		1.000189	4.004638
+ 1800		1.052684	4.129031
+ 1900		1.101655	4.211348
+ 2000		1.204867	4.307555
+ 2100		1.254872	4.395476
+ 2200		1.307226	4.563836
+ 2300		1.360903	4.728867
+ 2400		1.410977	4.878597
+ 2500		1.465783	4.990873
+ 2600		1.515273	5.090607
+ 2700		1.567690	5.164951
+ 2800		1.616423	5.278108
+ 2900		1.672349	5.403148
+ 3000		1.768108	5.548568
+ 3100		1.822490	5.672116
+ 3200		1.877354	5.790979
+ 3300		1.927051	5.903505
+ 3400		1.981748	6.022420
+ 3500		2.034347	nan
+ 3600		2.084867	nan
+ 3700		2.132722	nan
+ 3800		2.179400	nan
+ 3900		2.228312	nan
+ 4000		2.326225	nan
+ 4100		2.376491	nan
+ 4200		2.425385	nan
+ 4300		2.475722	nan
+ 4400		2.526022	nan
+ 4500		2.574087	nan
+ 4600		2.622162	nan
+ 4700		2.669104	nan
+ 4800		2.717850	nan
+ 4900		2.765995	nan
+ 5000		2.868628	nan
+ 5100		2.915238	nan
+# ('2017-08-24 11:06:53', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.057485	3.913755
+  100		0.461120	4.085746
+  200		0.833243	4.274426
+  300		1.209676	4.503674
+  400		1.590463	4.799658
+  500		1.969232	5.012271
+  600		2.337567	5.351289
+# ('2017-08-24 11:07:08', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.061682	3.913755
+  100		0.419232	4.089913
+  200		0.784881	4.287981
+  300		1.139897	4.456605
+  400		1.487450	4.694626
+  500		1.849656	4.971417
+  600		2.197126	5.161926
+  700		2.562705	5.282647
+  800		2.916298	5.446325
+  900		3.275238	5.683587
+ 1000		3.676809	5.973333
+# ('2017-08-24 11:07:44', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.055867	3.913755
+  100		0.409527	4.112145
+# ('2017-08-24 11:09:01', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.579232	3.913755
+# ('2017-08-24 11:09:14', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.065296	3.913754
+# ('2017-08-24 11:09:59', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.094475	3.913755
+# ('2017-08-24 11:10:09', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.063264	3.913755
+# ('2017-08-24 11:10:44', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.052532	3.913755
+  100		0.422771	4.131921
+# ('2017-08-24 11:11:10', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.060363	3.913755
+# ('2017-08-24 11:11:20', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.059090	3.913755
+# ('2017-08-24 11:11:27', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 11:12:00', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.061026	3.913755
+# ('2017-08-24 11:12:17', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.102505	3.913755
+# ('2017-08-24 11:12:28', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.088999	3.913755
+# ('2017-08-24 11:12:35', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.054454	3.913755
+  100		0.387295	4.098551
+  200		0.725355	4.262882
+  300		1.053999	4.473222
+  400		1.384947	4.639000
+  500		1.707726	4.883966
+  600		2.038188	5.173255
+  700		2.364371	5.596248
+# ('2017-08-24 11:13:06', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.067441	3.913755
+# ('2017-08-24 11:13:16', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.061372	3.913755
+# ('2017-08-24 11:13:32', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.101474	3.913754
+# ('2017-08-24 11:14:12', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.096163	3.913755
+# ('2017-08-24 11:14:23', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.057780	3.913755
+  100		0.435410	4.123580
+# ('2017-08-24 11:14:31', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.060525	3.913755
+# ('2017-08-24 11:14:47', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 11:14:55', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 11:15:41', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.072418	3.913755
+# ('2017-08-24 11:15:57', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.070463	3.913755
+# ('2017-08-24 11:16:03', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.051520	3.913755
+  100		0.369058	4.108772
+  200		0.700770	4.280494
+  300		1.027162	4.532413
+  400		1.358838	4.835946
+  500		1.691986	5.181173
+  600		2.020897	5.499368
+  700		2.352947	5.669465
+  800		2.678610	5.853186
+  900		3.016782	5.998818
+ 1000		3.397443	6.212455
+ 1100		3.727400	6.484421
+ 1200		4.056034	6.774180
+ 1300		4.387736	7.078325
+ 1400		4.719355	7.331623
+ 1500		5.052586	7.616070
+ 1600		5.395278	7.813505
+ 1700		5.732570	8.190350
+ 1800		6.069735	8.370308
+ 1900		6.403366	8.699698
+ 2000		6.774673	8.823976
+ 2100		7.103293	9.022172
+ 2200		7.435656	9.140880
+ 2300		7.768092	9.273371
+# ('2017-08-24 11:16:28', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.539011	3.913755
+# ('2017-08-24 11:16:49', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.541887	3.913755
+# ('2017-08-24 11:17:02', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.058273	3.913755
+  100		0.392436	4.114476
+  200		0.717815	4.371255
+  300		1.039137	4.651803
+  400		1.352414	5.003550
+  500		1.679538	5.293166
+  600		2.003541	5.572122
+  700		2.325039	5.858498
+  800		2.648207	6.135109
+  900		2.976699	6.462698
+# ('2017-08-24 11:17:18', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.569083	3.913755
+# ('2017-08-24 11:18:53', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.057311	3.913755
+  100		0.403280	4.146792
+  200		0.734571	4.421075
+  300		1.068106	4.813077
+  400		1.409130	5.142065
+  500		1.751408	5.458691
+  600		2.087860	5.741746
+  700		2.428975	6.027747
+  800		2.767292	6.279902
+  900		3.104874	6.621423
+ 1000		3.481001	6.893476
+# ('2017-08-24 11:19:08', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.103975	3.913755
+# ('2017-08-24 11:19:22', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 11:19:32', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.101556	3.913755
+# ('2017-08-24 11:19:50', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.075904	3.913755
+# ('2017-08-24 11:19:55', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.055144	3.913755
+  100		0.363044	3.996236
+  200		0.672143	4.032985
+  300		0.987090	4.069309
+  400		1.289682	4.095445
+  500		1.595637	4.120619
+  600		1.897142	4.143940
+  700		2.197218	4.165879
+  800		2.504440	4.182287
+  900		2.799348	4.206381
+ 1000		3.155280	4.226718
+ 1100		3.461816	4.244025
+ 1200		3.762936	4.256298
+ 1300		4.067383	4.276063
+ 1400		4.370276	4.296799
+ 1500		4.668370	4.316166
+ 1600		4.971007	4.332214
+ 1700		5.283286	4.342740
+ 1800		5.586060	4.349666
+ 1900		5.892531	4.366566
+ 2000		6.240373	4.380122
+ 2100		6.539042	4.389321
+ 2200		6.840839	4.419387
+ 2300		7.140088	4.447552
+ 2400		7.445830	4.467159
+ 2500		7.741256	4.485023
+ 2600		8.056008	4.488276
+ 2700		8.364425	4.484563
+ 2800		8.666599	4.501069
+ 2900		8.974843	4.500636
+ 3000		9.321918	4.501074
+ 3100		9.621448	4.513286
+ 3200		9.937700	4.522740
+ 3300		10.246123	4.536025
+ 3400		10.549888	4.555641
+ 3500		10.859538	4.558167
+ 3600		11.167159	4.561176
+ 3700		11.475760	4.562631
+ 3800		11.789610	4.571771
+ 3900		12.094358	4.586408
+ 4000		12.445446	4.596691
+ 4100		12.749795	4.595179
+ 4200		13.054014	4.601224
+ 4300		13.362101	4.599884
+ 4400		13.657844	4.608343
+ 4500		13.958084	4.614674
+ 4600		14.263941	4.609717
+ 4700		14.571836	4.617815
+ 4800		14.878820	4.626442
+ 4900		15.187512	4.635135
+ 5000		15.538251	4.640805
+ 5100		15.854276	4.656252
+ 5200		16.160201	4.668478
+# ('2017-08-24 11:21:47', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 11:22:14', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.055504	3.919398
+  100		0.375382	4.463354
+  200		0.717417	4.854488
+  300		1.040986	5.214913
+  400		1.364180	5.562951
+  500		1.678082	5.869420
+  600		2.001454	6.161844
+  700		2.329971	6.435790
+  800		2.649292	6.680010
+  900		2.977703	6.880398
+ 1000		3.345420	7.069732
+ 1100		3.665740	7.233932
+ 1200		3.988330	7.387845
+ 1300		4.305318	7.550509
+# ('2017-08-24 11:22:52', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 11:23:01', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.058403	3.913755
+  100		0.374517	4.000937
+  200		0.692902	4.005402
+  300		1.021116	3.981116
+  400		1.352713	3.949390
+  500		1.668674	3.908039
+  600		1.982150	3.858628
+  700		2.289130	3.812221
+  800		2.614246	3.769597
+  900		2.928611	3.727704
+ 1000		3.299145	3.686000
+ 1100		3.615166	3.643641
+ 1200		3.928828	3.614201
+ 1300		4.239610	3.570955
+ 1400		4.549833	3.532709
+ 1500		4.863010	3.504213
+ 1600		5.172794	3.474781
+ 1700		5.483383	3.451531
+ 1800		5.787400	3.428534
+ 1900		6.092921	3.406449
+ 2000		6.444344	3.385113
+ 2100		6.753071	3.362869
+ 2200		7.063996	3.343683
+ 2300		7.377284	3.308092
+ 2400		7.688983	3.276528
+ 2500		8.003133	3.262570
+ 2600		8.324424	3.258052
+ 2700		8.638662	3.246015
+ 2800		8.949763	3.221854
+ 2900		9.268265	3.205522
+ 3000		9.624266	3.196790
+ 3100		9.928057	3.181460
+ 3200		10.233407	3.176540
+ 3300		10.541024	3.180253
+ 3400		10.859594	3.183303
+ 3500		11.178093	3.172543
+ 3600		11.496645	3.150343
+ 3700		11.816185	3.129458
+ 3800		12.127752	3.122286
+ 3900		12.446973	3.111582
+ 4000		12.801341	3.096634
+ 4100		13.125498	3.086267
+ 4200		13.438345	3.075998
+ 4300		13.750449	3.067205
+ 4400		14.063668	3.059063
+ 4500		14.372591	3.053123
+ 4600		14.677868	3.044871
+ 4700		14.983810	3.028479
+ 4800		15.290539	3.024831
+ 4900		15.607667	3.024812
+ 5000		15.958312	3.024023
+ 5100		16.261851	3.023072
+ 5200		16.578979	3.016367
+ 5300		16.897880	3.022432
+ 5400		17.220740	3.030505
+ 5500		17.545991	3.041263
+ 5600		17.861303	3.039966
+ 5700		18.174208	3.033742
+ 5800		18.494230	3.032499
+ 5900		18.810319	3.028931
+ 6000		19.175346	3.026798
+ 6100		19.487119	3.009900
+ 6200		19.802755	3.023315
+ 6300		20.121139	3.015911
+ 6400		20.442810	3.006750
+ 6500		20.757654	2.995091
+ 6600		21.073337	2.986003
+ 6700		21.386951	2.978656
+ 6800		21.702356	2.978243
+ 6900		22.019229	2.977449
+ 7000		22.380810	2.976804
+ 7100		22.701721	2.973194
+ 7200		23.024099	2.968929
+ 7300		23.341870	2.969699
+ 7400		23.648487	2.960907
+# ('2017-08-24 11:23:38', 'ptb-batch.py', Namespace(batchsize=8, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.056766	3.913755
+  100		0.465635	3.928820
+  200		0.878292	3.865138
+  300		1.281311	3.791887
+  400		1.690927	3.721993
+  500		2.105973	3.649774
+  600		2.516466	3.570268
+  700		2.935333	3.500873
+  800		3.347127	3.440612
+  900		3.752918	3.371953
+ 1000		4.212128	3.299901
+ 1100		4.639479	3.245881
+ 1200		5.045776	3.193972
+ 1300		5.453900	3.149777
+ 1400		5.865415	3.113031
+ 1500		6.283465	3.074347
+ 1600		6.693730	3.030668
+ 1700		7.105549	3.003845
+ 1800		7.510165	2.967331
+ 1900		7.919203	2.942254
+ 2000		8.369740	2.918436
+ 2100		8.778342	2.894803
+ 2200		9.184889	2.870954
+ 2300		9.595156	2.846037
+ 2400		10.012160	2.822415
+ 2500		10.413398	2.798799
+ 2600		10.816891	2.791212
+ 2700		11.233490	2.770098
+ 2800		11.638489	2.757071
+ 2900		12.056049	2.740876
+ 3000		12.496456	2.738413
+ 3100		12.913582	2.714504
+ 3200		13.328448	2.677775
+ 3300		13.740188	2.647348
+ 3400		14.147095	2.624711
+ 3500		14.550826	2.610828
+ 3600		14.967562	2.601409
+ 3700		15.373086	2.595685
+ 3800		15.786703	2.585835
+ 3900		16.201846	2.576455
+ 4000		16.651415	2.573042
+ 4100		17.051476	2.563581
+ 4200		17.448830	2.551641
+ 4300		17.851141	2.544158
+ 4400		18.259773	2.533971
+ 4500		18.671057	2.525243
+ 4600		19.077491	2.518634
+ 4700		19.480876	2.514367
+ 4800		19.887031	2.513334
+ 4900		20.297694	2.504662
+ 5000		20.747664	2.494450
+ 5100		21.153137	2.490363
+ 5200		21.563188	2.491484
+ 5300		21.987321	2.488438
+ 5400		22.401448	2.484178
+ 5500		22.811081	2.473602
+ 5600		23.225735	2.479290
+ 5700		23.633316	2.477332
+ 5800		24.039703	2.476980
+ 5900		24.454940	2.495405
+ 6000		24.913378	2.486033
+ 6100		25.318898	2.478602
+ 6200		25.734006	2.471784
+ 6300		26.149122	2.465632
+ 6400		26.554300	2.463235
+ 6500		26.972751	2.468626
+ 6600		27.391965	2.455720
+ 6700		27.795926	2.443218
+ 6800		28.217874	2.441580
+ 6900		28.627184	2.456388
+ 7000		29.086357	2.448513
+ 7100		29.487944	2.435763
+ 7200		29.913614	2.435189
+ 7300		30.333999	2.432668
+ 7400		30.748310	2.440173
+ 7500		31.162989	2.418367
+ 7600		31.576373	2.423576
+ 7700		31.979034	2.420606
+ 7800		32.396268	2.414338
+ 7900		32.812151	2.425306
+ 8000		33.275600	2.415466
+ 8100		33.685439	2.396607
+ 8200		34.097567	2.400588
+ 8300		34.514134	2.402341
+ 8400		34.924793	2.402457
+ 8500		35.341076	2.406066
+ 8600		35.749728	2.404103
+ 8700		36.156205	2.392105
+ 8800		36.569364	2.395943
+ 8900		36.982416	2.393531
+ 9000		37.440259	2.388281
+ 9100		37.850744	2.360913
+ 9200		38.259418	2.360769
+ 9300		38.673703	2.342081
+ 9400		39.076014	2.361432
+ 9500		39.484452	2.362091
+ 9600		39.907329	2.361595
+ 9700		40.331763	2.374962
+ 9800		40.744161	2.378280
+ 9900		41.161050	2.379286
+10000		41.618931	2.375132
+10100		42.043555	2.368716
+10200		42.447722	2.375480
+10300		42.865122	2.386213
+10400		43.289955	2.391233
+10500		43.709316	2.380014
+10600		44.158885	2.369158
+10700		44.586411	2.373809
+10800		45.007397	2.381669
+10900		45.437662	2.372658
+11000		45.910461	2.375013
+11100		46.336962	2.365664
+11200		46.754894	2.361038
+11300		47.183557	2.345892
+11400		47.616548	2.330193
+11500		48.048300	2.329548
+11600		48.480142	2.329497
+11700		48.906251	2.329472
+11800		49.348044	2.331943
+11900		49.783273	2.328983
+12000		50.256517	2.319333
+12100		50.692673	2.326434
+12200		51.101802	2.326266
+12300		51.517387	2.319976
+12400		51.935056	2.324146
+12500		52.346112	2.321688
+12600		52.748509	2.317631
+12700		53.156276	2.322317
+12800		53.570967	2.330831
+12900		53.979671	2.333732
+13000		54.443166	2.333032
+13100		54.869046	2.323701
+13200		55.286471	2.319333
+13300		55.706823	2.318877
+13400		56.123280	2.313345
+13500		56.533543	2.321825
+13600		56.953963	2.313635
+13700		57.365661	2.310042
+13800		57.786542	2.305133
+13900		58.200053	2.317212
+14000		58.657172	2.320326
+14100		59.068462	2.330043
+14200		59.483711	2.332907
+14300		59.902361	2.346677
+# ('2017-08-24 11:24:40', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.053606	3.913755
+  100		0.286027	4.015277
+  200		0.527398	4.025544
+  300		0.759484	3.982145
+  400		0.991003	3.918735
+  500		1.225618	3.863919
+  600		1.465017	3.851364
+  700		1.707081	3.826880
+  800		1.948666	3.804733
+  900		2.181912	3.770870
+ 1000		2.456460	3.733058
+ 1100		2.686984	3.697092
+ 1200		2.920927	3.658139
+ 1300		3.162471	3.608582
+ 1400		3.403350	3.572355
+ 1500		3.640317	3.538352
+ 1600		3.879502	3.493552
+# ('2017-08-24 11:27:22', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.088543	3.913755
+# ('2017-08-24 11:27:27', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.097461	3.913754
+# ('2017-08-24 11:27:54', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.099679	3.913755
+# ('2017-08-24 11:28:13', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.054014	3.913755
+  100		0.312961	4.013373
+  200		0.585962	4.017504
+  300		0.912264	3.994657
+  400		1.159350	3.954963
+  500		1.410975	3.918589
+  600		1.657598	3.878042
+  700		1.933598	3.835919
+# ('2017-08-24 11:29:38', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-24 11:29:58', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25))
+#  ITER		TIME		TRAIN LOSS
+    0		0.057950	3.913755
+  100		0.318073	3.994262
+  200		0.570267	4.027038
+  300		0.820789	4.026422
+  400		1.061948	4.005708
+  500		1.322619	3.974009
+  600		1.561812	3.929255
+  700		1.831470	3.896904
+  800		2.099336	3.849026
+  900		2.373613	3.808345
+ 1000		2.688864	3.765378
+ 1100		2.955081	3.718930
+ 1200		3.216630	3.678136
+# ('2017-08-25 09:25:38', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+    0		0.064843	3.913755
+  100		0.321826	4.026383
+  200		0.581817	4.042998
+  300		0.842774	4.035544
+  400		1.098029	4.017361
+  500		1.349968	3.994172
+  600		1.597433	3.953733
+  700		1.853061	3.889205
+  800		2.104080	3.837706
+  900		2.365766	3.791095
+ 1000		2.665751	3.742874
+ 1100		2.916600	3.699604
+ 1200		3.186734	3.645789
+ 1300		3.445937	3.613277
+ 1400		3.708419	3.580225
+ 1500		3.957549	3.536278
+ 1600		4.220840	3.515593
+ 1700		4.471550	3.477037
+ 1800		4.738830	3.431100
+ 1900		4.997820	3.406282
+# ('2017-08-25 09:25:48', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+    0		0.052138	3.913755
+  100		0.362106	3.974829
+  200		0.670867	3.960645
+  300		0.988480	3.920513
+  400		1.289457	3.862247
+  500		1.595181	3.812344
+  600		1.900019	3.740223
+  700		2.208950	3.666014
+  800		2.519699	3.610075
+  900		2.827004	3.571173
+# ('2017-08-25 09:26:44', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+    0		0.054528	3.913755
+  500		1.690536	3.835458
+ 1000		3.362310	3.593465
+ 1500		4.992616	3.347554
+# ('2017-08-25 09:27:08', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+  500		1.649536	3.819486
+ 1000		3.268676	3.526591
+ 1500		4.824160	3.306732
+ 2000		6.431846	3.146858
+ 2500		8.018795	3.025718
+ 3000		9.635562	2.949978
+# ('2017-08-25 09:27:51', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+  500		1.656948	3.740262
+ 1000		3.279481	3.435312
+ 1500		4.868587	3.205192
+ 2000		6.541671	3.066509
+# ('2017-08-25 09:27:59', 'ptb-batch.py', Namespace(batchsize=1, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+  500		1.276316	3.839920
+ 1000		2.525239	3.637457
+ 1500		3.731215	3.448250
+ 2000		4.974078	3.288881
+# ('2017-08-25 09:28:06', 'ptb-batch.py', Namespace(batchsize=2, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+  500		1.635770	3.847674
+ 1000		3.255701	3.585410
+ 1500		4.794864	3.385263
+ 2000		6.393187	3.234405
+# ('2017-08-25 09:28:14', 'ptb-batch.py', Namespace(batchsize=8, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+  500		2.063354	3.677208
+ 1000		4.088476	3.367507
+ 1500		6.057207	3.121463
+ 2000		8.064240	2.945295
+ 2500		10.039207	2.835639
+# ('2017-08-25 09:28:27', 'ptb-batch.py', Namespace(batchsize=32, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+  500		3.964236	3.554404
+ 1000		7.928060	3.181632
+ 1500		11.836510	2.951257
+# ('2017-08-25 09:28:50', 'ptb-batch.py', Namespace(batchsize=8, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+  500		2.061797	3.677394
+ 1000		4.089915	3.387700
+# ('2017-08-25 09:29:16', 'ptb-batch.py', Namespace(batchsize=8, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+  500		2.080401	2.375419
+ 1000		4.179694	1.440408
+ 1500		6.225044	0.873435
+# ('2017-08-25 09:29:35', 'ptb-batch.py', Namespace(batchsize=8, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+  500		1.898043	3.717732
+ 1000		3.793601	3.393225
+ 1500		5.719607	3.180467
+# ('2017-08-25 09:30:02', 'ptb-batch.py', Namespace(batchsize=8, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+  500		1.897771	3.746565
+ 1000		3.825113	3.460137
+ 1500		5.730224	3.187738
+# ('2017-08-25 09:30:36', 'ptb-batch.py', Namespace(batchsize=8, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+  500		1.982424	3.603411
+ 1000		3.986689	3.280763
+ 1500		5.978683	3.088063
+ 2000		7.988948	2.930092
+# ('2017-08-25 09:31:43', 'ptb-batch.py', Namespace(batchsize=8, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-25 09:31:55', 'ptb-batch.py', Namespace(batchsize=8, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-25 09:32:06', 'ptb-batch.py', Namespace(batchsize=8, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-25 09:32:24', 'ptb-batch.py', Namespace(batchsize=8, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+  500		1.843316	4.113840
+ 1000		3.665154	4.198395
+ 1500		5.476343	4.261838
+# ('2017-08-25 09:32:38', 'ptb-batch.py', Namespace(batchsize=8, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-25 09:32:54', 'ptb-batch.py', Namespace(batchsize=8, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-25 09:33:20', 'ptb-batch.py', Namespace(batchsize=8, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+  500		1.874104	3.661507
+# ('2017-08-25 09:33:27', 'ptb-batch.py', Namespace(batchsize=8, fname='./logs/ptb-batch.py.dat', hidden=16, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+  500		1.445914	3.632122
+ 1000		2.890134	3.388658
+ 1500		4.306495	3.164987
+ 2000		5.737731	3.033226
+ 2500		7.178909	2.973198
+ 3000		8.619413	2.957888
+ 3500		10.057097	2.880842
+# ('2017-08-25 09:33:41', 'ptb-batch.py', Namespace(batchsize=8, fname='./logs/ptb-batch.py.dat', hidden=8, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+  500		1.279448	3.742070
+# ('2017-08-25 09:33:49', 'ptb-batch.py', Namespace(batchsize=8, fname='./logs/ptb-batch.py.dat', hidden=8, seqlength=100, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+  500		4.741238	3.669165
+ 1000		9.437074	3.456774
+ 1500		14.171785	3.335178
+ 2000		18.951262	3.239635
+# ('2017-08-25 09:34:19', 'ptb-batch.py', Namespace(batchsize=16, fname='./logs/ptb-batch.py.dat', hidden=32, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+  500		2.121791	3.593521
+ 1000		4.247395	3.283635
+ 1500		6.416847	3.057499
+ 2000		8.706866	2.928615
+ 2500		10.964587	2.860701
+ 3000		13.229079	2.811175
+ 3500		15.484209	2.755735
+ 4000		17.733538	2.770000
+ 4500		19.990168	2.710642
+ 5000		22.218677	2.691711
+ 5500		24.501953	2.632052
+ 6000		26.761097	2.640621
+ 6500		29.036259	2.634425
+ 7000		31.340241	2.650880
+ 7500		33.602008	2.617874
+ 8000		35.873853	2.615735
+ 8500		38.118631	2.607690
+ 9000		40.353258	2.581012
+ 9500		42.543162	2.562965
+10000		44.794418	2.579111
+10500		47.049321	2.569461
+11000		49.254436	2.566253
+11500		51.440190	2.574867
+12000		53.687104	2.576126
+12500		55.944948	2.590462
+13000		58.127965	2.534186
+13500		60.261712	2.499472
+14000		62.443997	2.528139
+14500		64.621041	2.553909
+15000		66.788420	2.535895
+15500		68.941168	2.517315
+16000		71.077915	2.505042
+16500		73.214769	2.498229
+17000		75.362078	2.506009
+17500		77.499984	2.500468
+18000		79.625752	2.510374
+18500		81.751301	2.598522
+19000		83.902235	2.536420
+19500		86.063848	2.524435
+20000		88.250737	2.546986
+20500		90.388655	2.543789
+21000		92.532399	2.474850
+21500		94.685688	2.513668
+22000		96.843130	2.526558
+22500		98.968940	2.527283
+23000		101.134351	2.529474
+# ('2017-08-25 09:37:55', 'ptb-batch.py', Namespace(batchsize=16, fname='./logs/ptb-batch.py.dat', hidden=100, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+  500		3.555024	3.963885
+ 1000		7.098860	3.679992
+ 1500		10.647712	3.459251
+ 2000		14.295780	3.277477
+ 2500		17.880020	3.121528
+ 3000		21.451953	3.023300
+ 3500		25.004455	2.944776
+ 4000		28.521731	2.877729
+ 4500		32.037666	2.839891
+ 5000		35.561175	2.799778
+ 5500		39.110682	2.786599
+ 6000		42.643988	2.763116
+ 6500		46.163657	2.721028
+ 7000		49.699020	2.693773
+ 7500		53.228759	2.655962
+ 8000		56.754879	2.619755
+ 8500		60.309127	2.576072
+ 9000		63.837418	2.581570
+ 9500		67.398700	2.609534
+10000		71.013758	2.552996
+10500		74.517462	2.519846
+11000		78.048252	2.495264
+11500		81.591952	2.505745
+12000		85.140533	2.499475
+12500		88.670828	2.491336
+13000		92.192696	2.446941
+13500		95.716578	2.457374
+14000		99.266759	2.441253
+14500		102.793850	2.461376
+# ('2017-08-25 09:39:56', 'ptb-batch.py', Namespace(batchsize=16, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+  500		2.796694	3.639870
+ 1000		5.609413	3.272499
+ 1500		8.420866	3.020423
+ 2000		11.229219	2.874023
+ 2500		14.030225	2.730030
+ 3000		16.862662	2.603137
+ 3500		19.686441	2.554331
+ 4000		22.543077	2.510952
+ 4500		25.365815	2.487154
+ 5000		28.194386	2.477332
+ 5500		31.020717	2.426771
+ 6000		33.866153	2.424110
+ 6500		36.696923	2.399930
+ 7000		39.546805	2.384663
+ 7500		42.394164	2.395998
+ 8000		45.256723	2.369471
+# ('2017-08-25 09:40:45', 'ptb-batch.py', Namespace(batchsize=16, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-25 09:42:26', 'ptb-batch.py', Namespace(batchsize=16, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-25 09:42:39', 'ptb-batch.py', Namespace(batchsize=16, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+  500		2.642138	3.709805
+ 1000		5.274547	3.382503
+# ('2017-08-25 09:42:55', 'ptb-batch.py', Namespace(batchsize=16, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+  500		2.613293	2.376158
+ 1000		5.244601	1.440855
+ 1500		7.888687	0.873706
+ 2000		10.526269	0.529798
+ 2500		13.150130	0.321260
+ 3000		15.765888	0.194806
+ 3500		18.402134	0.118127
+ 4000		21.023427	0.071630
+ 4500		23.671983	0.043436
+ 5000		26.373502	0.026339
+ 5500		29.001151	0.015972
+ 6000		31.626595	0.009685
+ 6500		34.262045	0.005873
+ 7000		36.878713	0.003562
+ 7500		39.519695	0.002160
+# ('2017-08-25 09:53:24', 'ptb-batch.py', Namespace(batchsize=16, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+  500		2.607373	3.631222
+ 1000		5.161418	3.280929
+ 1500		7.724578	3.043299
+ 2000		10.438906	2.865290
+ 2500		13.072696	2.732010
+ 3000		15.696602	2.677197
+ 3500		18.315377	2.622707
+ 4000		20.975796	2.597027
+ 4500		23.593279	2.577908
+ 5000		26.216158	2.526979
+# ('2017-08-25 09:54:05', 'ptb-batch.py', Namespace(batchsize=4, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+  500		1.747832	3.750064
+ 1000		3.484133	3.460148
+ 1500		5.205068	3.253514
+ 2000		6.929133	3.078029
+ 2500		8.647312	2.968936
+ 3000		10.375829	2.867491
+ 3500		12.107285	2.804769
+ 4000		13.846394	2.757723
+ 4500		15.577089	2.704960
+ 5000		17.344802	2.648406
+ 5500		19.058526	2.618468
+ 6000		20.802141	2.565155
+ 6500		22.526857	2.561561
+ 7000		24.258678	2.577790
+ 7500		25.971521	2.599335
+ 8000		27.716801	2.555615
+ 8500		29.451097	2.565952
+ 9000		31.243598	2.558963
+ 9500		32.996940	2.534230
+10000		34.793917	2.518909
+10500		36.523716	2.509204
+11000		38.238277	2.479588
+11500		39.986019	2.477008
+# ('2017-08-25 09:54:50', 'ptb-batch.py', Namespace(batchsize=32, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+  500		3.616509	3.585108
+ 1000		7.222539	3.228958
+# ('2017-08-25 09:55:04', 'ptb-batch.py', Namespace(batchsize=100, fname='./logs/ptb-batch.py.dat', hidden=64, seqlength=25, timelimit=100))
+#  ITER		TIME		TRAIN LOSS
+  500		7.662154	3.499002
+ 1000		15.362050	3.127400
+ 1500		23.254357	2.808719
+ 2000		31.280900	2.685000
+ 2500		39.387143	2.577979
+ 3000		47.434739	2.517783
+ 3500		55.406397	2.437610
+ 4000		63.354495	2.412123
+ 4500		71.482255	2.379374
+ 5000		79.612262	2.382524
+ 5500		87.610461	2.320206
+ 6000		95.536469	2.312067
+ 6500		103.493246	2.309525

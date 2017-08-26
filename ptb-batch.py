@@ -35,6 +35,33 @@ print 'data has %d characters, %d unique.' % (data_size, vocab_size)
 char_to_ix = { ch:i for i,ch in enumerate(chars) }
 ix_to_char = { i:ch for i,ch in enumerate(chars) }
 
+# gradient checking
+from random import uniform
+def gradCheck(inputs, target, hprev):
+  global Wxh, Whh, Why, bh, by
+  num_checks, delta = 10, 1e-5
+  _, dWxh, dWhh, dWhy, dbh, dby, _ = lossFun(inputs, targets, hprev)
+  for param,dparam,name in zip([Wxh, Whh, Why, bh, by], [dWxh, dWhh, dWhy, dbh, dby], ['Wxh', 'Whh', 'Why', 'bh', 'by']):
+    s0 = dparam.shape
+    s1 = param.shape
+    assert s0 == s1, 'Error dims dont match: %s and %s.' % (`s0`, `s1`)
+    print name
+    for i in xrange(num_checks):
+      ri = int(uniform(0,param.size))
+      # evaluate cost at [x + delta] and [x - delta]
+      old_val = param.flat[ri]
+      param.flat[ri] = old_val + delta
+      cg0, _, _, _, _, _, _ = lossFun(inputs, targets, hprev)
+      param.flat[ri] = old_val - delta
+      cg1, _, _, _, _, _, _ = lossFun(inputs, targets, hprev)
+      param.flat[ri] = old_val # reset old value for this parameter
+      # fetch both numerical and analytic gradient
+      grad_analytic = dparam.flat[ri]
+      grad_numerical = (cg0 - cg1) / ( 2 * delta )
+      rel_error = abs(grad_analytic - grad_numerical) / abs(grad_numerical + grad_analytic)
+      print '%f, %f => %e ' % (grad_numerical, grad_analytic, rel_error)
+      # rel_error should be on order of 1e-7 or less
+
 # hyperparameters
 hidden_size = opt.hidden # size of hidden layer of neurons
 seq_length = opt.seqlength # number of steps to unroll the RNN for
@@ -67,7 +94,7 @@ def lossFun(inputs, targets, hprev):
     ys[t] = np.dot(Why, hs[t]) + by # unnormalized log probabilities for next chars
     ps[t] = np.exp(ys[t]) / np.sum(np.exp(ys[t]), axis=0) # probabilities for next chars
     #for b in range(0,B):
-    loss += -np.log(ps[t][targets[t,0],0])/np.log(2) # softmax (cross-entropy loss)
+    loss += -np.log(ps[t][targets[t,0],0]) # softmax (cross-entropy loss)
   # backward pass: compute gradients going backwards
   dWxh, dWhh, dWhy = np.zeros_like(Wxh), np.zeros_like(Whh), np.zeros_like(Why)
   dbh, dby = np.zeros_like(bh), np.zeros_like(by)
@@ -108,11 +135,9 @@ def sample(h, seed_ix, n):
 
 n = 0
 p = np.random.randint(len(data)-1-S,size=(B)).tolist()
-_inputs = [[0] * S] * B
-_targets = [[0] * S] * B
 inputs = np.zeros((S,B), dtype=int)
 targets = np.zeros((S,B), dtype=int)
-hprev = np.zeros((hidden_size,B))
+hprev = np.zeros((hidden_size,B), dtype=np.float32)
 mWxh, mWhh, mWhy = np.zeros_like(Wxh), np.zeros_like(Whh), np.zeros_like(Why)
 mbh, mby = np.zeros_like(bh), np.zeros_like(by) # memory variables for Adagrad
 smooth_loss = -np.log(1.0/vocab_size)*seq_length # loss at iteration 0
@@ -131,31 +156,26 @@ while t < T:
       inputs[:,b] = [char_to_ix[ch] for ch in data[p[b]:p[b]+seq_length]]
       targets[:,b] = [char_to_ix[ch] for ch in data[p[b]+1:p[b]+seq_length+1]]
 
-   # print inputs
-   #  [[41 20 27  0]
-   #  [ 1 43 42  1]
-   #  [26 38  1 45]
-   #  [43 33 25 32]
-   #  [44 21 37 27]]
-
   # sample from the model now and then
-  if n % 1000 == 0:
+  if n % 1000 == 0 and n > 0:
     sample_ix = sample(np.expand_dims(hprev[:,0], axis=1), inputs[0], 1000)
     txt = ''.join(ix_to_char[ix] for ix in sample_ix)
     print '----\n %s \n----' % (txt, )
+    gradCheck(inputs, targets, hprev)
 
   # forward seq_length characters through the net and fetch gradient
   loss, dWxh, dWhh, dWhy, dbh, dby, hprev = lossFun(inputs, targets, hprev)
   smooth_loss = smooth_loss * 0.999 + np.mean(loss) * 0.001
   interval = time.time() - last
-  if n % 100 == 0:
+
+  if n % 500 == 0 and n > 0:
+    tdelta = time.time()-last
     last = time.time()
     t = time.time()-start
-    print(t, "Iteration", n, "Train loss:", smooth_loss)
     entry = '{:5}\t\t{:3f}\t{:3f}\n'.format(n, t, smooth_loss/seq_length)
-    with open(logname, "a") as myfile:
-         myfile.write(entry)
-    print 'iter %d, %.4f BPC' % (n, smooth_loss / seq_length) # print progress
+    with open(logname, "a") as myfile: myfile.write(entry)
+
+    print '%.3f s, iter %d, %.4f BPC, %.2f char/s' % (t, n, smooth_loss / seq_length, (B*S*500)/tdelta) # print progress
 
   # perform parameter update with Adagrad
   for param, dparam, mem in zip([Wxh, Whh, Why, bh, by], 
@@ -164,6 +184,5 @@ while t < T:
     mem += dparam * dparam
     param += -learning_rate * dparam / np.sqrt(mem + 1e-8) # adagrad update
 
-  for b in range(0,B):
-    p[b] += seq_length # move data pointer
-  n += 1 # iteration counter 
+  for b in range(0,B): p[b] += seq_length # move data pointer
+  n += 1 # iteration counter
