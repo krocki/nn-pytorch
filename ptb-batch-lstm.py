@@ -7,11 +7,14 @@ import datetime, time
 import random
 from random import uniform
 
+def sigmoid(x):
+    return 1.0 / (1.0 + np.exp(-x))
+
 # gradient checking
-def gradCheck(inputs, target, hprev):
+def gradCheck(inputs, target, cprev, hprev):
   global Wxh, Whh, Why, bh, by
   num_checks, delta = 50, 1e-5
-  _, dWxh, dWhh, dWhy, dbh, dby, _ = lossFun(inputs, targets, hprev)
+  _, dWxh, dWhh, dWhy, dbh, dby, _, _ = lossFun(inputs, targets, cprev, hprev)
   print 'GRAD CHECK\n'
   for param,dparam,name in zip([Wxh, Whh, Why, bh, by], [dWxh, dWhh, dWhy, dbh, dby], ['Wxh', 'Whh', 'Why', 'bh', 'by']):
     s0 = dparam.shape
@@ -26,9 +29,9 @@ def gradCheck(inputs, target, hprev):
       # evaluate cost at [x + delta] and [x - delta]
       old_val = param.flat[ri]
       param.flat[ri] = old_val + delta
-      cg0, _, _, _, _, _, _ = lossFun(inputs, targets, hprev)
+      cg0, _, _, _, _, _, _ , _ = lossFun(inputs, targets, cprev, hprev)
       param.flat[ri] = old_val - delta
-      cg1, _, _, _, _, _, _ = lossFun(inputs, targets, hprev)
+      cg1, _, _, _, _, _, _ , _ = lossFun(inputs, targets, cprev, hprev)
       param.flat[ri] = old_val # reset old value for this parameter
       # fetch both numerical and analytic gradient
       grad_analytic = dparam.flat[ri]
@@ -88,20 +91,29 @@ learning_rate = 1e-1
 B = opt.batchsize
 
 # model parameters
-Wxh = np.random.randn(hidden_size, vocab_size)*0.01 # input to hidden
-Whh = np.random.randn(hidden_size, hidden_size)*0.01 # hidden to hidden
+Wxh = np.random.randn(4*hidden_size, vocab_size)*0.01 # input to hidden
+Whh = np.random.randn(4*hidden_size, hidden_size)*0.01 # hidden to hidden
 Why = np.random.randn(vocab_size, hidden_size)*0.01 # hidden to output
-bh = np.zeros((hidden_size, 1)) # hidden bias
+bh = np.zeros((4*hidden_size, 1)) # hidden bias
 by = np.zeros((vocab_size, 1)) # output bias
 
-def lossFun(inputs, targets, hprev):
+N = hidden_size
+M = vocab_size
+
+# i o f c
+# init f gates biases higher
+bh[2*N:3*N,:] = 1
+
+def lossFun(inputs, targets, cprev, hprev):
   """
   inputs,targets are both list of integers.
+  cprev is Hx1 array of initial memory cell state
   hprev is Hx1 array of initial hidden state
   returns the loss, gradients on model parameters, and last hidden state
   """
-  xs, hs, ys, ps = {}, {}, {}, {}
+  xs, hs, ys, ps, gs, cs = {}, {}, {}, {}, {}, {}
   hs[-1] = np.copy(hprev)
+  cs[-1] = np.copy(cprev)
   loss = 0
   # forward pass
   for t in xrange(len(inputs)):
@@ -109,15 +121,38 @@ def lossFun(inputs, targets, hprev):
     for b in range(0,B):
         xs[t][:,b][inputs[t][b]] = 1
 
-    hs[t] = np.tanh(np.dot(Wxh, xs[t]) + np.dot(Whh, hs[t-1]) + bh) # hidden state
+    #print Wxh.shape #256, 50
+    #print Whh.shape #64, 256
+    #print Why.shape #50, 256
+    #print xs[t].shape #50, 4
+    #print hs[t-1].shape #64, 4
+    #print bh.shape #256, 4
+
+    # gates linear part
+    gs[t] = np.dot(Wxh, xs[t]) + np.dot(Whh, hs[t-1]) + bh
+    # gates nonlinear part
+    #i, o, f gates - sigmoid
+    gs[t][0:3*N,:] = sigmoid(gs[t][0:3*N,:])
+    #c gate - tanh
+    gs[t][3*N:4*N, :] = np.tanh(gs[t][3*N:4*N,:])
+    #mem(t) = c gate * i gate + f gate * mem(t-1)
+    cs[t] = gs[t][3*N:4*N,:] * gs[t][0:N,:] + gs[t][2*N:3*N,:] * cs[t-1]
+    #mem(t) nonlinearity
+    cs[t] = np.tanh(cs[t])
+    #update hs
+    hs[t] = gs[t][N:2*N,:] * cs[t] # hidden state
     ys[t] = np.dot(Why, hs[t]) + by # unnormalized log probabilities for next chars
     ps[t] = np.exp(ys[t]) / np.sum(np.exp(ys[t]), axis=0) # probabilities for next chars
+
     for b in range(0,B):
         loss += -np.log(ps[t][targets[t,b],b]) # softmax (cross-entropy loss)
   # backward pass: compute gradients going backwards
   dWxh, dWhh, dWhy = np.zeros_like(Wxh), np.zeros_like(Whh), np.zeros_like(Why)
   dbh, dby = np.zeros_like(bh), np.zeros_like(by)
+  dcnext = np.zeros_like(cs[0])
   dhnext = np.zeros_like(hs[0])
+  dg = np.zeros_like(gs[0])
+
   for t in reversed(xrange(len(inputs))):
     dy = np.copy(ps[t])
     for b in range(0,B):
@@ -125,25 +160,41 @@ def lossFun(inputs, targets, hprev):
     dWhy += np.dot(dy, hs[t].T)
     dby += np.expand_dims(np.sum(dy,axis=1), axis=1)
     dh = np.dot(Why.T, dy) + dhnext # backprop into h
-    dhraw = (1 - hs[t] * hs[t]) * dh # backprop through tanh nonlinearity
-    dbh += np.expand_dims(np.sum(dhraw,axis=1), axis=1)
-    dWxh += np.dot(dhraw, xs[t].T)
-    dWhh += np.dot(dhraw, hs[t-1].T)
-    dhnext = np.dot(Whh.T, dhraw)
+
+    dc = dh * gs[t][N:2*N,:] + dcnext # backprop into c
+    dc = dc * (1 - cs[t] * cs[t]) # backprop though tanh
+
+    dg[N:2*N,:] = dh * cs[t] # o gates
+    dg[0:N,:] = gs[t][3*N:4*N,:] * dc # i gates
+    dg[2*N:3*N,:] = cs[t-1] * dc # f gates
+    dg[3*N:4*N,:] = gs[t][0:N,:] * dc # c gates
+    dg[0:3*N,:] = dg[0:3*N,:] * gs[t][0:3*N,:] * (1 - gs[t][0:3*N,:]) # backprop through sigmoids
+    dg[3*N:4*N,:] = dg[3*N:4*N,:] * (1 - gs[t][3*N:4*N,:] * gs[t][3*N:4*N,:]) # backprop through tanh
+    dbh += np.expand_dims(np.sum(dg,axis=1), axis=1)
+    dWxh += np.dot(dg, xs[t].T)
+    dWhh += np.dot(dg, hs[t-1].T)
+    dhnext = np.dot(Whh.T, dg)
+    dcnext = dc * gs[t][2*N:3*N,:]
   #  for dparam in [dWxh, dWhh, dWhy, dbh, dby]:
     #  np.clip(dparam, -5, 5, out=dparam) # clip to mitigate exploding gradients
-  return loss, dWxh, dWhh, dWhy, dbh, dby, hs[len(inputs)-1]
+  return loss, dWxh, dWhh, dWhy, dbh, dby, cs[len(inputs)-1], hs[len(inputs)-1]
 
-def sample(h, seed_ix, n):
-  """ 
+def sample(c, h, seed_ix, n):
+  """
   sample a sequence of integers from the model 
   h is memory state, seed_ix is seed letter for first time step
   """
   x = np.zeros((vocab_size, 1))
   x[seed_ix] = 1
   ixes = []
+
   for t in xrange(n):
-    h = np.tanh(np.dot(Wxh, x) + np.dot(Whh, h) + bh)
+    g = np.dot(Wxh, x) + np.dot(Whh,h) + bh
+    g[0:3*N,:] = sigmoid(g[0:3*N,:])
+    g[3*N:4*N, :] = np.tanh(g[3*N:4*N,:])
+    c = g[3*N:4*N,:] * g[0:N,:] + g[2*N:3*N,:] * c
+    c = np.tanh(c)
+    h = g[N:2*N,:] * c
     y = np.dot(Why, h) + by
     p = np.exp(y) / np.sum(np.exp(y))
     ix = np.random.choice(range(vocab_size), p=p.ravel())
@@ -156,6 +207,7 @@ n = 0
 p = np.random.randint(len(data)-1-S,size=(B)).tolist()
 inputs = np.zeros((S,B), dtype=int)
 targets = np.zeros((S,B), dtype=int)
+cprev = np.zeros((hidden_size,B), dtype=np.float32)
 hprev = np.zeros((hidden_size,B), dtype=np.float32)
 mWxh, mWhh, mWhy = np.zeros_like(Wxh), np.zeros_like(Whh), np.zeros_like(Why)
 mbh, mby = np.zeros_like(bh), np.zeros_like(by) # memory variables for Adagrad
@@ -168,7 +220,8 @@ while t < T:
   # prepare inputs (we're sweeping from left to right in steps seq_length long)
   for b in range(0,B):
       if p[b]+seq_length+1 >= len(data) or n == 0:
-        hprev[:,b] = np.zeros(hidden_size) # reset RNN memory
+        cprev[:,b] = np.zeros(hidden_size) # reset LSTM memory
+        hprev[:,b] = np.zeros(hidden_size) # reset hidden memory
         p[b] = np.random.randint(len(data)-1-S)
         print p[b]
 
@@ -176,14 +229,14 @@ while t < T:
       targets[:,b] = [char_to_ix[ch] for ch in data[p[b]+1:p[b]+seq_length+1]]
 
   # sample from the model now and then
-  if n % 100 == 0 and n > 0:
-    sample_ix = sample(np.expand_dims(hprev[:,0], axis=1), inputs[0], 1000)
+  if n % 10000 == 0 and n > 0:
+    sample_ix = sample(np.expand_dims(cprev[:,0], axis=1), np.expand_dims(hprev[:,0], axis=1), inputs[0], 1000)
     txt = ''.join(ix_to_char[ix] for ix in sample_ix)
     print '----\n %s \n----' % (txt, )
-    gradCheck(inputs, targets, hprev)
+    gradCheck(inputs, targets, cprev, hprev)
 
   # forward seq_length characters through the net and fetch gradient
-  loss, dWxh, dWhh, dWhy, dbh, dby, hprev = lossFun(inputs, targets, hprev)
+  loss, dWxh, dWhh, dWhy, dbh, dby, cprev, hprev = lossFun(inputs, targets, cprev, hprev)
   smooth_loss = smooth_loss * 0.999 + np.mean(loss) * 0.001
   interval = time.time() - last
 
