@@ -15,6 +15,7 @@ parser = argparse.ArgumentParser(description='')
 parser.add_argument('--fname', type=str, default = './logs/' + sys.argv[0] + '.dat', help='log filename')
 parser.add_argument('--batchsize', type=int, default = 1, help='batch size')
 parser.add_argument('--hidden', type=int, default = 64, help='hiddens')
+parser.add_argument('--memory_width', type=int, default = 8, help='memory dim')
 parser.add_argument('--memory_loc', type=int, default = 1, help='number of memory locations')
 parser.add_argument('--seqlength', type=int, default = 25, help='seqlength')
 parser.add_argument('--timelimit', type=int, default = 100, help='time limit (s)')
@@ -22,7 +23,7 @@ parser.add_argument('--gradcheck', action='store_const', const=True, default=Fal
 parser.add_argument('--gensample', action='store_const', const=True, default=False, help='generate samples?')
 parser.add_argument('--gradcheck_fname', type=str, default = 'gradcheck.log', help='gradcheck log filename')
 parser.add_argument('--sample_fname', type=str, default = 'sample.log', help='sample log filename')
-parser.add_argument('--log_interval', type=int, default = 1000, help='how often run debug checks (grad, sample)')
+parser.add_argument('--log_interval', type=int, default = 100, help='how often run debug checks (grad, sample)')
 parser.add_argument('--BPC_interval', type=int, default = 100, help='how often show BPC')
 
 opt = parser.parse_args()
@@ -33,15 +34,16 @@ S = opt.seqlength
 T = opt.timelimit
 GC = opt.gradcheck
 MN = opt.memory_loc
+MW = opt.memory_width
 
 # gradient checking
 def gradCheck(inputs, target, rprev, Mprev, cprev, hprev):
-  global Wxh, Whh, Why, bh, by
-  num_checks, delta = 50, 1e-5
-  _, dWxh, dWhh, dWhy, dbh, dby, _, _, _, _ = lossFun(inputs, targets, rprev, Mprev, cprev, hprev)
+  global Wxh, Whh, Why, Whz, Wry, bh, by, bz
+  num_checks, delta = 100, 1e-5
+  _, dWxh, dWhh, dWhy, dWhz, dWry, dbh, dby, dbz, _, _, _, _ = lossFun(inputs, targets, rprev, Mprev, cprev, hprev)
   with open(opt.gradcheck_fname, "w") as myfile: myfile.write("-----\n")
 
-  for param,dparam,name in zip([Wxh, Whh, Why, bh, by], [dWxh, dWhh, dWhy, dbh, dby], ['Wxh', 'Whh', 'Why', 'bh', 'by']):
+  for param,dparam,name in zip([Wxh, Whh, Why, Whz, Wry, bh, by, bz], [dWxh, dWhh, dWhy, dWhz, dWry, dbh, dby, dbz], ['Wxh', 'Whh', 'Why', 'Whz', 'Wry', 'bh', 'by', 'bz']):
     s0 = dparam.shape
     s1 = param.shape
     assert s0 == s1, 'Error dims dont match: %s and %s.' % (`s0`, `s1`)
@@ -54,9 +56,9 @@ def gradCheck(inputs, target, rprev, Mprev, cprev, hprev):
       # evaluate cost at [x + delta] and [x - delta]
       old_val = param.flat[ri]
       param.flat[ri] = old_val + delta
-      cg0, _, _, _, _, _, _ , _ , _ , _ = lossFun(inputs, targets, rprev, Mprev, cprev, hprev)
+      cg0, _, _, _, _, _, _ , _ , _ , _, _ , _ , _ = lossFun(inputs, targets, rprev, Mprev, cprev, hprev)
       param.flat[ri] = old_val - delta
-      cg1, _, _, _, _, _, _ , _ , _ , _ = lossFun(inputs, targets, rprev, Mprev, cprev, hprev)
+      cg1, _, _, _, _, _, _ , _ , _ , _, _ , _ , _ = lossFun(inputs, targets, rprev, Mprev, cprev, hprev)
       param.flat[ri] = old_val # reset old value for this parameter
       # fetch both numerical and analytic gradient
       grad_analytic = dparam.flat[ri]
@@ -116,13 +118,11 @@ bh = np.zeros((4*N, 1)) # hidden bias
 by = np.zeros((M, 1)) # output bias
 
 # external memory related
-MW = M
-
 # [R W E] = 3MW
-Whz = np.random.randn(3*MW, N)*0.01 # memory interface
-
-bz = np.zeros((3*MW, 1)) # memory interface bias
-
+MR = 1 # number of read heads
+Whz = np.random.randn(MR + 1 + 2*MW, N)*0.01 # memory interface
+bz = np.zeros((MR + 1 + 2*MW, 1)) # memory interface bias
+Wry = np.random.randn(M, MR*MW)*0.01 # read vector -> y
 # i o f c
 # init f gates biases higher
 bh[2*N:3*N,:] = 1
@@ -139,7 +139,7 @@ def lossFun(inputs, targets, rprev, Mprev, cprev, hprev):
   """
   global CNT
   xs, hs, vs, ys, ps, gs, cs = {}, {}, {}, {}, {}, {}, {}
-  Ms, rs, zs, wrs, wws, wes =  {}, {}, {}, {}, {}, {}
+  Ms, rs, zs, wrs, wws, wes, ehat, wvs, rbetas, wbetas =  {}, {}, {}, {}, {}, {}, {}, {}, {}, {}
   hs[-1] = np.copy(hprev)
   cs[-1] = np.copy(cprev)
   Ms[-1] = np.copy(Mprev)
@@ -169,21 +169,28 @@ def lossFun(inputs, targets, rprev, Mprev, cprev, hprev):
     ### external memory control
     # interface vector
     zs[t] = np.dot(Whz, hs[t]) + bz
-    zs[t][0:3*MW,:] = sigmoid(zs[t][0:3*MW,:])
-    # z = {wr, ww, we}
-    wrs[t] = zs[t][0:MW, :]
-    wws[t] = zs[t][MW:2*MW, :]
-    wes[t] = zs[t][2*MW:3*MW, :]
+    rbetas[t] = sigmoid(zs[t][0:MR, :]) # R read strengths (R values)
+    wbetas[t] = sigmoid(zs[t][MR:MR+1])
+    print "---"
+    print wbetas[t]
+    #wes[t] = sigmoid(zs[t][MR+1:MR+1+MW, :]) # erase vector (W values)
+    #wvs[t] = zs[t][MR+1+MW:MR+1+2*MW, :] # write vector (W values)
+
+    # for now, simplify
+    #wrs[t] = sigmoid(rbetas[t]) # read weight vectors
+    #wws[t] = sigmoid(wbetas[t]) # write weight vectors
+
     # external memory state update
-    Ms[t] = Ms[t-1] * (1 - wes[t]) + wws[t] * vs[t]
-    rs[t] = Ms[t] * wrs[t] # read vector
+    Ms[t] = Ms[t-1] * (1) # * wes[t] # + np.dot(wws[t], wvs[t].T).T
+    rs[t] = Ms[t] * rbetas[t] # read vector
 
-
-    ys[t] = vs[t]
+    ys[t] = vs[t] + np.dot(Wry, rs[t])
     ps[t] = np.exp(ys[t]) / np.sum(np.exp(ys[t]), axis=0) # probabilities for next chars
 
     #debug
     if CNT % 20000 == 0:
+        z_entry = np.array_str(zs[t].T, max_line_width=70, precision=3, suppress_small=True)
+        with open('interface.log', "w") as mf: mf.write(z_entry)
         v_entry = np.array_str(vs[t].T, max_line_width=70, precision=3, suppress_small=True)
         with open('v.log', "w") as mf: mf.write(v_entry)
         mem_entry = np.array_str(Ms[t].T, max_line_width=70, precision=3, suppress_small=True)
@@ -198,11 +205,15 @@ def lossFun(inputs, targets, rprev, Mprev, cprev, hprev):
     for b in range(0,B):
         loss += -np.log(ps[t][targets[t,b],b]) # softmax (cross-entropy loss)
   # backward pass: compute gradients going backwards
-  dWxh, dWhh, dWhy = np.zeros_like(Wxh), np.zeros_like(Whh), np.zeros_like(Why)
-  dbh, dby = np.zeros_like(bh), np.zeros_like(by)
+  dWxh, dWhh, dWhy, dWhz, dWry = np.zeros_like(Wxh), np.zeros_like(Whh), np.zeros_like(Why), np.zeros_like(Whz), np.zeros_like(Wry)
+  dbh, dby, dbz = np.zeros_like(bh), np.zeros_like(by), np.zeros_like(bz)
   dcnext = np.zeros_like(cs[0])
   dhnext = np.zeros_like(hs[0])
+  dmnext = np.zeros_like(Ms[0])
+
   dg = np.zeros_like(gs[0])
+  dz = np.zeros_like(zs[0])
+  dm = np.zeros_like(Ms[0])
 
   for t in reversed(xrange(len(inputs))):
     dy = np.copy(ps[t])
@@ -210,7 +221,17 @@ def lossFun(inputs, targets, rprev, Mprev, cprev, hprev):
         dy[targets[t][b], b] -= 1 # backprop into y. see http://cs231n.github.io/neural-networks-case-study/#grad if confused here
     dWhy += np.dot(dy, hs[t].T)
     dby += np.expand_dims(np.sum(dy,axis=1), axis=1)
-    dh = np.dot(Why.T, dy) + dhnext # backprop into h
+
+    dWry += np.dot(dy, rs[t].T)
+    drs = np.dot(Wry.T, dy)
+    drbetas = np.dot(Ms[t].T, drs)
+
+    dz[0:MR,:] = drbetas * rbetas[t] * (1-rbetas[t])
+
+    dWhz += np.dot(dz, hs[t].T)
+    dbz += np.expand_dims(np.sum(dz, axis=1), axis=1)
+
+    dh = np.dot(Why.T, dy) + np.dot(Whz.T, dz) + dhnext # backprop into h
 
     dc = dh * gs[t][N:2*N,:] + dcnext # backprop into c
     dc = dc * (1 - cs[t] * cs[t]) # backprop though tanh
@@ -230,7 +251,7 @@ def lossFun(inputs, targets, rprev, Mprev, cprev, hprev):
     #  np.clip(dparam, -5, 5, out=dparam) # clip to mitigate exploding gradients
     CNT += 1
 
-  return loss, dWxh, dWhh, dWhy, dbh, dby, rs[len(inputs)-1], Ms[len(inputs)-1], cs[len(inputs)-1], hs[len(inputs)-1]
+  return loss, dWxh, dWhh, dWhy, dWhz, dWry, dbh, dby, dbz, rs[len(inputs)-1], Ms[len(inputs)-1], cs[len(inputs)-1], hs[len(inputs)-1]
 
 def sample(r, M, c, h, seed_ix, n):
   """
@@ -262,11 +283,12 @@ p = np.random.randint(len(data)-1-S,size=(B)).tolist()
 inputs = np.zeros((S,B), dtype=int)
 targets = np.zeros((S,B), dtype=int)
 rprev = np.zeros((MW,B), dtype=np.float32)
-Mprev = np.zeros((MW,B), dtype=np.float32)
+#Mprev = np.zeros((MN*MW,B), dtype=np.float32)
+Mprev = np.random.randn(MN*MW,B)
 cprev = np.zeros((hidden_size,B), dtype=np.float32)
 hprev = np.zeros((hidden_size,B), dtype=np.float32)
-mWxh, mWhh, mWhy = np.zeros_like(Wxh), np.zeros_like(Whh), np.zeros_like(Why)
-mbh, mby = np.zeros_like(bh), np.zeros_like(by) # memory variables for Adagrad
+mWxh, mWhh, mWhy, mWhz, mWry = np.zeros_like(Wxh), np.zeros_like(Whh), np.zeros_like(Why), np.zeros_like(Whz), np.zeros_like(Wry)
+mbh, mby, mbz = np.zeros_like(bh), np.zeros_like(by), np.zeros_like(bz) # memory variables for Adagrad
 smooth_loss = -np.log(1.0/vocab_size)*seq_length # loss at iteration 0
 start = time.time()
 
@@ -277,12 +299,12 @@ while t < T:
   for b in range(0,B):
       if p[b]+seq_length+1 >= len(data) or n == 0:
         rprev[:,b] = np.zeros(MW) # reset read vector
-        Mprev[:,b] = np.zeros(MW) # reset external memory
+        #Mprev[:,b] = np.zeros(MN*MW) # reset external memory
         cprev[:,b] = np.zeros(hidden_size) # reset LSTM memory
         hprev[:,b] = np.zeros(hidden_size) # reset hidden memory
         p[b] = np.random.randint(len(data)-1-S)
         print p[b]
-
+        print Mprev
       inputs[:,b] = [char_to_ix[ch] for ch in data[p[b]:p[b]+seq_length]]
       targets[:,b] = [char_to_ix[ch] for ch in data[p[b]+1:p[b]+seq_length+1]]
 
@@ -297,7 +319,7 @@ while t < T:
     if GC: gradCheck(inputs, targets, rprev, Mprev, cprev, hprev)
 
   # forward seq_length characters through the net and fetch gradient
-  loss, dWxh, dWhh, dWhy, dbh, dby, rprev, Mprev, cprev, hprev = lossFun(inputs, targets, rprev, Mprev, cprev, hprev)
+  loss, dWxh, dWhh, dWhy, dWhz, dWry, dbh, dby, dbz, rprev, Mprev, cprev, hprev = lossFun(inputs, targets, rprev, Mprev, cprev, hprev)
   smooth_loss = smooth_loss * 0.999 + np.mean(loss)/np.log(2) * 0.001
   interval = time.time() - last
 
@@ -311,9 +333,9 @@ while t < T:
     print '%.3f s, iter %d, %.4f BPC, %.2f char/s' % (t, n, smooth_loss / seq_length, (B*S*opt.BPC_interval)/tdelta) # print progress
 
   # perform parameter update with Adagrad
-  for param, dparam, mem in zip([Wxh, Whh, Why, bh, by], 
-                                [dWxh, dWhh, dWhy, dbh, dby], 
-                                [mWxh, mWhh, mWhy, mbh, mby]):
+  for param, dparam, mem in zip([Wxh, Whh, Why, Whz, Wry, bh, by, bz], 
+                                [dWxh, dWhh, dWhy, dWhz, dWry, dbh, dby, dbz], 
+                                [mWxh, mWhh, mWhy, mWhz, mWry, mbh, mby, mbz]):
     mem += dparam * dparam
     param += -learning_rate * dparam / np.sqrt(mem + 1e-8) # adagrad update
 
