@@ -176,7 +176,7 @@ while t < T:
       targets[:,b] = [char_to_ix[ch] for ch in data[p[b]+1:p[b]+seq_length+1]]
 
   # sample from the model now and then
-  if n % 100 == 0 and n > 0:
+  if n < 0:
     sample_ix = sample(np.expand_dims(hprev[:,0], axis=1), inputs[0], 1000)
     txt = ''.join(ix_to_char[ix] for ix in sample_ix)
     print '----\n %s \n----' % (txt, )
@@ -184,7 +184,7 @@ while t < T:
 
   # forward seq_length characters through the net and fetch gradient
   loss, dWxh, dWhh, dWhy, dbh, dby, hprev = lossFun(inputs, targets, hprev)
-  smooth_loss = smooth_loss * 0.999 + np.mean(loss) * 0.001
+  smooth_loss = smooth_loss * 0.999 + np.mean(loss)/np.log(2) * 0.001
   interval = time.time() - last
 
   if n % 500 == 0 and n > 0:

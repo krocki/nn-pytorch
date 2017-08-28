@@ -10,12 +10,17 @@ from random import uniform
 def sigmoid(x):
     return 1.0 / (1.0 + np.exp(-x))
 
+gradchecklogname = 'gradcheck.log'
+samplelogname = 'sample.log'
+
 # gradient checking
 def gradCheck(inputs, target, cprev, hprev):
   global Wxh, Whh, Why, bh, by
   num_checks, delta = 50, 1e-5
   _, dWxh, dWhh, dWhy, dbh, dby, _, _ = lossFun(inputs, targets, cprev, hprev)
   print 'GRAD CHECK\n'
+  with open(gradchecklogname, "w") as myfile: myfile.write("-----\n")
+
   for param,dparam,name in zip([Wxh, Whh, Why, bh, by], [dWxh, dWhh, dWhy, dbh, dby], ['Wxh', 'Whh', 'Why', 'bh', 'by']):
     s0 = dparam.shape
     s1 = param.shape
@@ -52,8 +57,10 @@ def gradCheck(inputs, target, cprev, hprev):
           valid_checks += 1
 
     mean_error /= num_checks
-    print '%s:\n\t min %e, max %e, mean %e # %d/%d\n\n\tn = [%e, %e]\n\ta = [%e, %e]' % (name, min_error, max_error, mean_error, num_checks, valid_checks, min_numerical, max_numerical, min_analytic, max_analytic)
+    #print '%s:\n\t min %e, max %e, mean %e # %d/%d\n\n\tn = [%e, %e]\n\ta = [%e, %e]' % (name, min_error, max_error, mean_error, num_checks, valid_checks, min_numerical, max_numerical, min_analytic, max_analytic)
       # rel_error should be on order of 1e-7 or less
+    entry = '%s:\n\t min %e, max %e, mean %e # %d/%d\n\n\tn = [%e, %e]\n\ta = [%e, %e]\n' % (name, min_error, max_error, mean_error, num_checks, valid_checks, min_numerical, max_numerical, min_analytic, max_analytic)
+    with open(gradchecklogname, "a") as myfile: myfile.write(entry)
 
 ### parse args
 parser = argparse.ArgumentParser(description='')
@@ -229,15 +236,17 @@ while t < T:
       targets[:,b] = [char_to_ix[ch] for ch in data[p[b]+1:p[b]+seq_length+1]]
 
   # sample from the model now and then
-  if n % 10000 == 0 and n > 0:
-    sample_ix = sample(np.expand_dims(cprev[:,0], axis=1), np.expand_dims(hprev[:,0], axis=1), inputs[0], 1000)
+  if n < 0:
+    sample_ix = sample(np.expand_dims(cprev[:,0], axis=1), np.expand_dims(hprev[:,0], axis=1), inputs[0], 5000)
     txt = ''.join(ix_to_char[ix] for ix in sample_ix)
-    print '----\n %s \n----' % (txt, )
+    #print '----\n %s \n----' % (txt, )
+    entry = '%s\n' % (txt)
+    with open(samplelogname, "w") as myfile: myfile.write(entry)
     gradCheck(inputs, targets, cprev, hprev)
 
   # forward seq_length characters through the net and fetch gradient
   loss, dWxh, dWhh, dWhy, dbh, dby, cprev, hprev = lossFun(inputs, targets, cprev, hprev)
-  smooth_loss = smooth_loss * 0.999 + np.mean(loss) * 0.001
+  smooth_loss = smooth_loss * 0.999 + np.mean(loss)/np.log(2) * 0.001
   interval = time.time() - last
 
   if n % 500 == 0 and n > 0:
