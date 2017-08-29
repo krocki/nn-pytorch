@@ -1,0 +1,70 @@
+# ('2017-08-29 09:10:45', 'ptb-dnc-v3.py', Namespace(batchsize=1, fname='./logs/ptb-dnc-v3.py.dat', fp64=True, gradcheck=False, hidden=64, seqlength=25, timelimit=1000))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-29 09:14:12', 'ptb-dnc-v3.py', Namespace(batchsize=1, fname='./logs/ptb-dnc-v3.py.dat', fp64=True, gradcheck=False, hidden=64, seqlength=25, timelimit=1000))
+#  ITER		TIME		TRAIN LOSS
+# ('2017-08-29 09:15:29', 'ptb-dnc-v3.py', Namespace(batchsize=1, fname='./logs/ptb-dnc-v3.py.dat', fp64=True, gradcheck=False, hidden=64, seqlength=25, timelimit=1000))
+#  ITER		TIME		TRAIN LOSS
+  100		24.436240	5.291845
+  200		26.908011	5.220081
+  300		29.366783	5.127352
+  400		31.984856	5.007167
+  500		34.393256	4.856815
+  600		36.805102	4.682943
+  700		39.214077	4.568033
+  800		41.639718	4.486083
+  900		43.957139	4.390617
+ 1000		46.285526	4.328697
+ 1100		48.635425	4.242911
+ 1200		51.028285	4.153149
+ 1300		53.413280	4.058030
+ 1400		55.781124	3.965934
+ 1500		58.139495	3.872768
+ 1600		60.561800	3.803560
+# ('2017-08-29 09:19:15', 'ptb-dnc-v3.py', Namespace(batchsize=4, fname='./logs/ptb-dnc-v3.py.dat', fp64=True, gradcheck=False, hidden=64, seqlength=25, timelimit=1000))
+#  ITER		TIME		TRAIN LOSS
+  100		3.527503	5.304858
+# ('2017-08-29 09:21:04', 'ptb-dnc-v3.py', Namespace(batchsize=4, fname='./logs/ptb-dnc-v3.py.dat', fp64=True, gradcheck=True, hidden=64, samplelength=1000, seqlength=25, timelimit=1000))
+#  ITER		TIME		TRAIN LOSS
+  100		3.659595	5.262172
+# ('2017-08-29 09:21:36', 'ptb-dnc-v3.py', Namespace(batchsize=4, fname='./logs/ptb-dnc-v3.py.dat', fp64=True, gradcheck=True, hidden=64, sample_length=1000, seqlength=25, timelimit=1000))
+#  ITER		TIME		TRAIN LOSS
+  100		3.569956	5.265334
+  200		38.440784	5.130555
+  300		41.982425	4.984998
+  400		45.484689	4.854962
+  500		48.998520	4.717775
+  600		52.513586	4.602669
+  700		56.020171	4.486909
+  800		59.537255	4.359865
+  900		63.069459	4.247038
+ 1000		66.588597	4.160931
+ 1100		70.166310	4.072591
+ 1200		73.722803	3.981971
+ 1300		77.325108	3.890707
+ 1400		80.929702	3.795263
+ 1500		84.531515	3.706632
+ 1600		88.142363	3.653793
+ 1700		91.742912	3.596063
+ 1800		95.279157	3.537459
+ 1900		98.828146	3.469602
+ 2000		102.374316	3.424452
+ 2100		105.918408	3.398495
+ 2200		109.466012	3.366102
+ 2300		113.023023	3.336444
+ 2400		116.567252	3.315207
+ 2500		120.116256	3.288226
+ 2600		123.654085	3.261519
+ 2700		127.193166	3.236713
+ 2800		130.737535	3.186898
+ 2900		134.245434	3.188228
+ 3000		137.764367	3.165418
+ 3100		141.280199	3.134685
+# ('2017-08-29 09:25:35', 'ptb-dnc-v3.py', Namespace(batchsize=16, check_interval=1000, fname='./logs/ptb-dnc-v3.py.dat', fp64=True, gradcheck=True, hidden=64, sample_length=1000, seqlength=25, timelimit=1000))
+#  ITER		TIME		TRAIN LOSS
+ 1000		57.126622	3.983443
+ 2000		104.555194	3.271759
+ 3000		151.368277	2.918414
+ 4000		198.281427	2.700507
+ 5000		245.183318	2.601743
+ 6000		300.573999	2.527216
+ 7000		347.546909	2.501749
