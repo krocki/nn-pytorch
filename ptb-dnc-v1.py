@@ -10,6 +10,26 @@ from random import uniform
 def sigmoid(x):
     return 1.0 / (1.0 + np.exp(-x))
 
+### parse args
+parser = argparse.ArgumentParser(description='')
+parser.add_argument('--fname', type=str, default = './logs/' + sys.argv[0] + '.dat', help='log filename')
+parser.add_argument('--batchsize', type=int, default = 1, help='batch size')
+parser.add_argument('--hidden', type=int, default = 64, help='hiddens')
+parser.add_argument('--seqlength', type=int, default = 25, help='seqlength')
+parser.add_argument('--timelimit', type=int, default = 1000, help='time limit (s)')
+parser.add_argument('--gradcheck', action='store_const', const=True, default=False, help='run gradcheck?')
+parser.add_argument('--fp64', action='store_const', const=True, default=False, help='double precision?')
+
+opt = parser.parse_args()
+print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), sys.argv[0], opt)
+logname = opt.fname
+B = opt.batchsize
+S = opt.seqlength
+T = opt.timelimit
+GC = opt.gradcheck
+datatype = np.float32
+if opt.fp64: datatype = np.float64
+
 gradchecklogname = 'gradcheck.log'
 samplelogname = 'sample.log'
 
@@ -59,28 +79,9 @@ def gradCheck(inputs, target, cprev, hprev):
     mean_error /= num_checks
     print '%s:\t\tn = [%e, %e]\tmin %e, max %e\t\n\t\ta = [%e, %e]\tmean %e # %d/%d' % (name, min_numerical, max_numerical, min_error, max_error, min_analytic, max_analytic, mean_error, num_checks, valid_checks)
       # rel_error should be on order of 1e-7 or less
-    entry = '%s:\t\tn = [%e, %e]\tmin %e, max %e\t\n\t\ta = [%e, %e]\tmean %e # %d/%d' % (name, min_numerical, max_numerical, min_error, max_error, min_analytic, max_analytic, mean_error, num_checks, valid_checks)
+    entry = '%s:\t\tn = [%e, %e]\tmin %e, max %e\t\n\t\ta = [%e, %e]\tmean %e # %d/%d\n' % (name, min_numerical, max_numerical, min_error, max_error, min_analytic, max_analytic, mean_error, num_checks, valid_checks)
     with open(gradchecklogname, "a") as myfile: myfile.write(entry)
 
-### parse args
-parser = argparse.ArgumentParser(description='')
-parser.add_argument('--fname', type=str, default = './logs/' + sys.argv[0] + '.dat', help='log filename')
-parser.add_argument('--batchsize', type=int, default = 1, help='batch size')
-parser.add_argument('--hidden', type=int, default = 64, help='hiddens')
-parser.add_argument('--seqlength', type=int, default = 25, help='seqlength')
-parser.add_argument('--timelimit', type=int, default = 100, help='time limit (s)')
-parser.add_argument('--gradcheck', action='store_const', const=True, default=False, help='run gradcheck?')
-parser.add_argument('--fp64', action='store_const', const=True, default=False, help='double precision?')
-
-opt = parser.parse_args()
-print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), sys.argv[0], opt)
-logname = opt.fname
-B = opt.batchsize
-S = opt.seqlength
-T = opt.timelimit
-GC = opt.gradcheck
-datatype = np.float32
-if opt.fp64: datatype = np.float64
 
 start = time.time()
 with open(logname, "a") as myfile:
@@ -109,6 +110,13 @@ Why = np.random.randn(vocab_size, hidden_size).astype(datatype)*0.01 # hidden to
 bh = np.zeros((4*hidden_size, 1), dtype = datatype) # hidden bias
 by = np.zeros((vocab_size, 1), dtype = datatype) # output bias
 
+# external memory
+Wrh = np.random.randn(4*hidden_size, vocab_size).astype(datatype)*0.01 # read vector to hidden
+Whv = np.random.randn(vocab_size, hidden_size).astype(datatype)*0.01 # write content
+Whr = np.random.randn(vocab_size, hidden_size).astype(datatype)*0.01 # read strength
+Whw = np.random.randn(vocab_size, hidden_size).astype(datatype)*0.01 # write strength
+Whe = np.random.randn(vocab_size, hidden_size).astype(datatype)*0.01 # erase strength
+
 N = hidden_size
 M = vocab_size
 
@@ -124,8 +132,18 @@ def lossFun(inputs, targets, cprev, hprev):
   returns the loss, gradients on model parameters, and last hidden state
   """
   xs, hs, ys, ps, gs, cs = {}, {}, {}, {}, {}, {}
+
+  # external mem
+  mem_new_content, mem_read_gate, mem_write_gate, rs = {}, {}, {}, {}
+  #
+
+  # !! TEMP
+  rprev = np.random.randn(vocab_size, B)
+  #
   hs[-1] = np.copy(hprev)
   cs[-1] = np.copy(cprev)
+  rs[-1] = np.copy(rprev)
+
   loss = 0
   # forward pass
   for t in xrange(len(inputs)):
@@ -142,6 +160,13 @@ def lossFun(inputs, targets, cprev, hprev):
 
     # gates linear part
     gs[t] = np.dot(Wxh, xs[t]) + np.dot(Whh, hs[t-1]) + bh
+
+    ############ external memory input ##########
+
+    # gs[t] += np.dot(Wrh, rs[t-1]) # add previous read vector
+
+    ###############
+
     # gates nonlinear part
     #i, o, f gates - sigmoid
     gs[t][0:3*N,:] = sigmoid(gs[t][0:3*N,:])
@@ -154,12 +179,32 @@ def lossFun(inputs, targets, cprev, hprev):
     #update hs
     hs[t] = gs[t][N:2*N,:] * cs[t] # hidden state
     ys[t] = np.dot(Why, hs[t]) + by # unnormalized log probabilities for next chars
+
+    ##### external mem ########
+
+    mem_new_content[t] = sigmoid(np.dot(Whv, hs[t]))
+    mem_write_gate[t] = sigmoid(np.dot(Whw, hs[t]))
+    mem_read_gate[t] = sigmoid(np.dot(Whr, hs[t]))
+    #memerase[t] = sigmoid(np.dot(Whe, hs[t]))
+
+    rs[t] = mem_read_gate[t] * mem_new_content[t] * mem_write_gate[t]
+
+    # rs[t].shape = 50,20
+    ys[t] += rs[t] # add read vector to output
+
+    ###########################
+
     ps[t] = np.exp(ys[t]) / np.sum(np.exp(ys[t]), axis=0) # probabilities for next chars
 
     for b in range(0,B):
         loss += -np.log(ps[t][targets[t,b],b]) # softmax (cross-entropy loss)
   # backward pass: compute gradients going backwards
   dWxh, dWhh, dWhy = np.zeros_like(Wxh), np.zeros_like(Whh), np.zeros_like(Why)
+
+  ### ext
+  dWhr, dWhv, dWhw = np.zeros_like(Whr), np.zeros_like(Whv), np.zeros_like(Whw)
+  ###
+
   dbh, dby = np.zeros_like(bh), np.zeros_like(by)
   dcnext = np.zeros_like(cs[0])
   dhnext = np.zeros_like(hs[0])
@@ -170,8 +215,32 @@ def lossFun(inputs, targets, cprev, hprev):
     for b in range(0,B):
         dy[targets[t][b], b] -= 1 # backprop into y. see http://cs231n.github.io/neural-networks-case-study/#grad if confused here
     dWhy += np.dot(dy, hs[t].T)
+    ########
+    drs = dy
+
+    #iface gates
+    dmem_write_gate = drs * mem_new_content[t] * mem_read_gate[t]
+    dmem_read_gate = drs * mem_new_content[t] * mem_write_gate[t]
+    dmem_new_content = drs * mem_read_gate[t] * mem_write_gate[t]
+
+    # sigmoids
+    dmem_read_gate = dmem_read_gate * mem_read_gate[t] * (1-mem_read_gate[t])
+    dmem_write_gate = dmem_write_gate * mem_write_gate[t] * (1-mem_write_gate[t])
+    dmem_new_content = dmem_new_content * mem_new_content[t] * (1-mem_new_content[t])
+
+    # linearities
+    dWhw += np.dot(dmem_write_gate, hs[t].T)
+    dWhr += np.dot(dmem_read_gate, hs[t].T)
+    dWhv += np.dot(dmem_new_content, hs[t].T)
+    ########
+
     dby += np.expand_dims(np.sum(dy,axis=1), axis=1)
     dh = np.dot(Why.T, dy) + dhnext # backprop into h
+
+    dh += np.dot(Whw.T, dmem_write_gate)
+    dh += np.dot(Whr.T, dmem_read_gate)
+    dh += np.dot(Whv.T, dmem_new_content)
+    ####
 
     dc = dh * gs[t][N:2*N,:] + dcnext # backprop into c
     dc = dc * (1 - cs[t] * cs[t]) # backprop though tanh
@@ -241,7 +310,7 @@ while t < T:
       targets[:,b] = [char_to_ix[ch] for ch in data[p[b]+1:p[b]+seq_length+1]]
 
   # sample from the model now and then
-  if n % 500 == 0 and n > 0:
+  if n % 5000 == 100 and n > 0:
     sample_ix = sample(np.expand_dims(cprev[:,0], axis=1), np.expand_dims(hprev[:,0], axis=1), inputs[0], 500)
     txt = ''.join(ix_to_char[ix] for ix in sample_ix)
     print '----\n %s \n----' % (txt, )
