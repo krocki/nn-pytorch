@@ -90,7 +90,7 @@ with open(logname, "a") as myfile:
     myfile.write("\n#  ITER\t\tTIME\t\tTRAIN LOSS\n")
 
 # data I/O
-data = open('./ptb/ptb.train.txt', 'r').read() # should be simple plain text file
+data = open('./enwik8', 'r').read() # should be simple plain text file
 chars = list(set(data))
 data_size, vocab_size = len(data), len(chars)
 print 'data has %d characters, %d unique.' % (data_size, vocab_size)
@@ -324,7 +324,7 @@ while t < T:
       if p[b]+seq_length+1 >= len(data) or n == 0:
         cprev[:,b] = np.zeros(hidden_size, dtype=datatype) # reset LSTM memory
         hprev[:,b] = np.zeros(hidden_size, dtype=datatype) # reset hidden memory
-        mprev[:,b] = np.random.randn(vocab_size).astype(datatype) # reset ext memory
+        mprev[:,b] = np.zeros(vocab_size, dtype=datatype) # reset ext memory
         rprev[:,b] = np.zeros(vocab_size, dtype=datatype) # reset read vec memory
         p[b] = np.random.randint(len(data)-1-S)
 
