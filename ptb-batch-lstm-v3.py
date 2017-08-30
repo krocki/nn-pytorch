@@ -16,7 +16,7 @@ samplelogname = 'sample.log'
 # gradient checking
 def gradCheck(inputs, target, cprev, hprev):
   global Wxh, Whh, Why, bh, by
-  num_checks, delta = 50, 1e-5
+  num_checks, delta = 10, 1e-5
   _, dWxh, dWhh, dWhy, dbh, dby, _, _ = lossFun(inputs, targets, cprev, hprev)
   print 'GRAD CHECK\n'
   with open(gradchecklogname, "w") as myfile: myfile.write("-----\n")
@@ -68,7 +68,7 @@ parser.add_argument('--fname', type=str, default = './logs/' + sys.argv[0] + '.d
 parser.add_argument('--batchsize', type=int, default = 1, help='batch size')
 parser.add_argument('--hidden', type=int, default = 64, help='hiddens')
 parser.add_argument('--seqlength', type=int, default = 25, help='seqlength')
-parser.add_argument('--timelimit', type=int, default = 100, help='time limit (s)')
+parser.add_argument('--timelimit', type=int, default = 1000, help='time limit (s)')
 parser.add_argument('--gradcheck', action='store_const', const=True, default=False, help='run gradcheck?')
 parser.add_argument('--fp64', action='store_const', const=True, default=False, help='double precision?')
 
@@ -241,7 +241,7 @@ while t < T:
       targets[:,b] = [char_to_ix[ch] for ch in data[p[b]+1:p[b]+seq_length+1]]
 
   # sample from the model now and then
-  if n % 500 == 0 and n > 0:
+  if n % 1000 == 0 and n > 0:
     sample_ix = sample(np.expand_dims(cprev[:,0], axis=1), np.expand_dims(hprev[:,0], axis=1), inputs[0], 500)
     txt = ''.join(ix_to_char[ix] for ix in sample_ix)
     print '----\n %s \n----' % (txt, )
@@ -261,7 +261,7 @@ while t < T:
     entry = '{:5}\t\t{:3f}\t{:3f}\n'.format(n, t, smooth_loss/seq_length)
     with open(logname, "a") as myfile: myfile.write(entry)
 
-    print '%.3f s, iter %d, %.4f BPC, %.2f char/s' % (t, n, smooth_loss / seq_length, (B*S*500)/tdelta) # print progress
+    print '%.3f s, iter %d, %.4f BPC, %.2f char/s' % (t, n, smooth_loss / seq_length, (B*S*100)/tdelta) # print progress
 
   # perform parameter update with Adagrad
   for param, dparam, mem in zip([Wxh, Whh, Why, bh, by], 

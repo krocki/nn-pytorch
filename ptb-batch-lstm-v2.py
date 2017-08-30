@@ -10,34 +10,16 @@ from random import uniform
 def sigmoid(x):
     return 1.0 / (1.0 + np.exp(-x))
 
-### parse args
-parser = argparse.ArgumentParser(description='')
-parser.add_argument('--fname', type=str, default = './logs/' + sys.argv[0] + '.dat', help='log filename')
-parser.add_argument('--batchsize', type=int, default = 1, help='batch size')
-parser.add_argument('--hidden', type=int, default = 64, help='hiddens')
-parser.add_argument('--seqlength', type=int, default = 25, help='seqlength')
-parser.add_argument('--timelimit', type=int, default = 100, help='time limit (s)')
-parser.add_argument('--gradcheck', action='store_const', const=True, default=False, help='run gradcheck?')
-parser.add_argument('--gensample', action='store_const', const=True, default=False, help='generate samples?')
-parser.add_argument('--gradcheck_fname', type=str, default = 'gradcheck.log', help='gradcheck log filename')
-parser.add_argument('--sample_fname', type=str, default = 'sample.log', help='sample log filename')
-parser.add_argument('--log_interval', type=int, default = 1000, help='how often run debug checks (grad, sample)')
-parser.add_argument('--BPC_interval', type=int, default = 100, help='how often show BPC')
-
-opt = parser.parse_args()
-print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), sys.argv[0], opt)
-logname = opt.fname
-B = opt.batchsize
-S = opt.seqlength
-T = opt.timelimit
-GC = opt.gradcheck
+gradchecklogname = 'gradcheck.log'
+samplelogname = 'sample.log'
 
 # gradient checking
 def gradCheck(inputs, target, cprev, hprev):
   global Wxh, Whh, Why, bh, by
   num_checks, delta = 50, 1e-5
   _, dWxh, dWhh, dWhy, dbh, dby, _, _ = lossFun(inputs, targets, cprev, hprev)
-  with open(opt.gradcheck_fname, "w") as myfile: myfile.write("-----\n")
+  print 'GRAD CHECK\n'
+  with open(gradchecklogname, "w") as myfile: myfile.write("-----\n")
 
   for param,dparam,name in zip([Wxh, Whh, Why, bh, by], [dWxh, dWhh, dWhy, dbh, dby], ['Wxh', 'Whh', 'Why', 'bh', 'by']):
     s0 = dparam.shape
@@ -78,8 +60,22 @@ def gradCheck(inputs, target, cprev, hprev):
     print '%s:\n\t min %e, max %e, mean %e # %d/%d\n\n\tn = [%e, %e]\n\ta = [%e, %e]' % (name, min_error, max_error, mean_error, num_checks, valid_checks, min_numerical, max_numerical, min_analytic, max_analytic)
       # rel_error should be on order of 1e-7 or less
     entry = '%s:\n\t min %e, max %e, mean %e # %d/%d\n\n\tn = [%e, %e]\n\ta = [%e, %e]\n' % (name, min_error, max_error, mean_error, num_checks, valid_checks, min_numerical, max_numerical, min_analytic, max_analytic)
-    with open(opt.gradcheck_fname, "a") as myfile: myfile.write(entry)
+    with open(gradchecklogname, "a") as myfile: myfile.write(entry)
 
+### parse args
+parser = argparse.ArgumentParser(description='')
+parser.add_argument('--fname', type=str, default = './logs/' + sys.argv[0] + '.dat', help='log filename')
+parser.add_argument('--batchsize', type=int, default = 1, help='batch size')
+parser.add_argument('--hidden', type=int, default = 64, help='hiddens')
+parser.add_argument('--seqlength', type=int, default = 25, help='seqlength')
+parser.add_argument('--timelimit', type=int, default = 100, help='time limit (s)')
+
+opt = parser.parse_args()
+print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), sys.argv[0], opt)
+logname = opt.fname
+B = opt.batchsize
+S = opt.seqlength
+T = opt.timelimit
 
 start = time.time()
 with open(logname, "a") as myfile:
@@ -131,6 +127,13 @@ def lossFun(inputs, targets, cprev, hprev):
     xs[t] = np.zeros((vocab_size, B)) # encode in 1-of-k representation
     for b in range(0,B):
         xs[t][:,b][inputs[t][b]] = 1
+
+    #print Wxh.shape #256, 50
+    #print Whh.shape #64, 256
+    #print Why.shape #50, 256
+    #print xs[t].shape #50, 4
+    #print hs[t-1].shape #64, 4
+    #print bh.shape #256, 4
 
     # gates linear part
     gs[t] = np.dot(Wxh, xs[t]) + np.dot(Whh, hs[t-1]) + bh
@@ -233,28 +236,27 @@ while t < T:
       targets[:,b] = [char_to_ix[ch] for ch in data[p[b]+1:p[b]+seq_length+1]]
 
   # sample from the model now and then
-  if n % opt.log_interval == 0 and n > 0:
-    if opt.gensample:
-          sample_ix = sample(np.expand_dims(cprev[:,0], axis=1), np.expand_dims(hprev[:,0], axis=1), inputs[0], opt.log_interval)
-          txt = ''.join(ix_to_char[ix] for ix in sample_ix)
-          print '----\n %s \n----' % (txt, )
-          entry = '%s\n' % (txt)
-          with open(opt.sample_fname, "w") as myfile: myfile.write(entry)
-    if GC: gradCheck(inputs, targets, cprev, hprev)
+  if n % 500 == 0 and n > 0:
+    sample_ix = sample(np.expand_dims(cprev[:,0], axis=1), np.expand_dims(hprev[:,0], axis=1), inputs[0], 500)
+    txt = ''.join(ix_to_char[ix] for ix in sample_ix)
+    print '----\n %s \n----' % (txt, )
+    entry = '%s\n' % (txt)
+    with open(samplelogname, "w") as myfile: myfile.write(entry)
+    gradCheck(inputs, targets, cprev, hprev)
 
   # forward seq_length characters through the net and fetch gradient
   loss, dWxh, dWhh, dWhy, dbh, dby, cprev, hprev = lossFun(inputs, targets, cprev, hprev)
-  smooth_loss = smooth_loss * 0.999 + np.mean(loss)/np.log(2) * 0.001
+  smooth_loss = smooth_loss * 0.999 + np.mean(loss)/(np.log(2)*B) * 0.001
   interval = time.time() - last
 
-  if n % opt.BPC_interval == 0 and n > 0:
+  if n % 100 == 0 and n > 0:
     tdelta = time.time()-last
     last = time.time()
     t = time.time()-start
     entry = '{:5}\t\t{:3f}\t{:3f}\n'.format(n, t, smooth_loss/seq_length)
     with open(logname, "a") as myfile: myfile.write(entry)
 
-    print '%.3f s, iter %d, %.4f BPC, %.2f char/s' % (t, n, smooth_loss / seq_length, (B*S*opt.BPC_interval)/tdelta) # print progress
+    print '%.3f s, iter %d, %.4f BPC, %.2f char/s' % (t, n, smooth_loss / seq_length, (B*S*500)/tdelta) # print progress
 
   # perform parameter update with Adagrad
   for param, dparam, mem in zip([Wxh, Whh, Why, bh, by], 

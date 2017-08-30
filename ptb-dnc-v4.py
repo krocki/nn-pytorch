@@ -39,11 +39,11 @@ samplelogname = 'sample.log'
 def gradCheck(inputs, target, cprev, hprev, mprev, rprev):
   global Wxh, Whh, Why, Whr, Whv, Whw, Whe, Wrh, bh, by
   num_checks, delta = 10, 1e-5
-  _, dWxh, dWhh, dWhy, dWhr, dWhv, dWhw, dWhe, dWrh, dbh, dby, _, _ = lossFun(inputs, targets, cprev, hprev, mprev, rprev)
+  _, dWxh, dWhh, dWhy, dWhr, dWhv, dWhw, dWhe, dWrh, dWry, dbh, dby, _, _ = lossFun(inputs, targets, cprev, hprev, mprev, rprev)
   print 'GRAD CHECK\n'
   with open(gradchecklogname, "w") as myfile: myfile.write("-----\n")
 
-  for param,dparam,name in zip([Wxh, Whh, Why, Whr, Whv, Whw, Whe, Wrh, bh, by], [dWxh, dWhh, dWhy, dWhr, dWhv, dWhw, dWhe, dWrh, dbh, dby], ['Wxh', 'Whh', 'Why', 'Whr', 'Whv', 'Whw', 'Whe', 'Wrh', 'bh', 'by']):
+  for param,dparam,name in zip([Wxh, Whh, Why, Whr, Whv, Whw, Whe, Wrh, Wry, bh, by], [dWxh, dWhh, dWhy, dWhr, dWhv, dWhw, dWhe, dWrh, dWry, dbh, dby], ['Wxh', 'Whh', 'Why', 'Whr', 'Whv', 'Whw', 'Whe', 'Wrh', 'Wry', 'bh', 'by']):
     s0 = dparam.shape
     s1 = param.shape
     assert s0 == s1, 'Error dims dont match: %s and %s.' % (`s0`, `s1`)
@@ -56,9 +56,9 @@ def gradCheck(inputs, target, cprev, hprev, mprev, rprev):
       # evaluate cost at [x + delta] and [x - delta]
       old_val = param.flat[ri]
       param.flat[ri] = old_val + delta
-      cg0, _, _, _, _, _, _ ,_, _, _, _ , _ , _ = lossFun(inputs, targets, cprev, hprev, mprev, rprev)
+      cg0, _, _, _, _, _, _ ,_, _, _, _ , _ , _ , _ = lossFun(inputs, targets, cprev, hprev, mprev, rprev)
       param.flat[ri] = old_val - delta
-      cg1, _, _, _, _, _, _ ,_, _, _, _ , _ , _ = lossFun(inputs, targets, cprev, hprev, mprev, rprev)
+      cg1, _, _, _, _, _, _ ,_, _, _, _ , _ , _ , _ = lossFun(inputs, targets, cprev, hprev, mprev, rprev)
       param.flat[ri] = old_val # reset old value for this parameter
       # fetch both numerical and analytic gradient
       grad_analytic = dparam.flat[ri]
@@ -92,8 +92,8 @@ with open(logname, "a") as myfile:
     myfile.write("\n#  ITER\t\tTIME\t\tTRAIN LOSS\n")
 
 # data I/O
-#data = open('./ptb/ptb.train.txt', 'r').read() # should be simple plain text file
-data = open('./data/enwik8', 'r').read()
+data = open('./ptb/ptb.train.txt', 'r').read() # should be simple plain text file
+#data = open('./enwik8', 'r').read()
 chars = list(set(data))
 data_size, vocab_size = len(data), len(chars)
 print 'data has %d characters, %d unique.' % (data_size, vocab_size)
@@ -114,11 +114,15 @@ bh = np.zeros((4*hidden_size, 1), dtype = datatype) # hidden bias
 by = np.zeros((vocab_size, 1), dtype = datatype) # output bias
 
 # external memory
+read_heads = 1
+mem_width = vocab_size
+
 Wrh = np.random.randn(4*hidden_size, vocab_size).astype(datatype)*0.01 # read vector to hidden
 Whv = np.random.randn(vocab_size, hidden_size).astype(datatype)*0.01 # write content
 Whr = np.random.randn(vocab_size, hidden_size).astype(datatype)*0.01 # read strength
 Whw = np.random.randn(vocab_size, hidden_size).astype(datatype)*0.01 # write strength
 Whe = np.random.randn(vocab_size, hidden_size).astype(datatype)*0.01 # erase strength
+Wry = np.random.randn(vocab_size, read_heads * mem_width).astype(datatype)*0.01 # erase strength
 
 N = hidden_size
 M = vocab_size
@@ -181,16 +185,17 @@ def lossFun(inputs, targets, cprev, hprev, mprev, rprev):
     mem_read_gate[t] = sigmoid(np.dot(Whr, hs[t]))
     mem_erase_gate[t] = sigmoid(np.dot(Whe, hs[t]))
 
-    memory[t] = memory[t-1] * (1 - mem_erase_gate[t] * mem_write_gate[t])
+    memory[t] = memory[t-1] * (1 - mem_erase_gate[t] * mem_write_gate[t]) # 1
+    #memory[t] = memory[t-1] * (1 - mem_erase_gate[t]) # 2
     memory[t] += mem_new_content[t] * mem_write_gate[t]
 
     rs[t] = memory[t] * mem_read_gate[t]
 
     # rs[t].shape = 50,20
-    ys[t] += rs[t] # add read vector to output
+    ys[t] += np.dot(Wry, rs[t]) # add read vector to output
+    #ys[t] += rs[t] # add read vector to output
 
     ###########################
-
     ps[t] = np.exp(ys[t]) / np.sum(np.exp(ys[t]), axis=0) # probabilities for next chars
 
     for b in range(0,B):
@@ -199,7 +204,7 @@ def lossFun(inputs, targets, cprev, hprev, mprev, rprev):
   dWxh, dWhh, dWhy = np.zeros_like(Wxh), np.zeros_like(Whh), np.zeros_like(Why )
 
   ### ext
-  dWhr, dWhv, dWhw, dWhe, dWrh = np.zeros_like(Whr), np.zeros_like(Whv), np.zeros_like(Whw), np.zeros_like(Whe), np.zeros_like(Wrh)
+  dWhr, dWhv, dWhw, dWhe, dWrh, dWry = np.zeros_like(Whr), np.zeros_like(Whv), np.zeros_like(Whw), np.zeros_like(Whe), np.zeros_like(Wrh), np.zeros_like(Wry)
   ###
 
   dbh, dby = np.zeros_like(bh), np.zeros_like(by)
@@ -216,16 +221,23 @@ def lossFun(inputs, targets, cprev, hprev, mprev, rprev):
         dy[targets[t][b], b] -= 1 # backprop into y. see http://cs231n.github.io/neural-networks-case-study/#grad if confused here
     dWhy += np.dot(dy, hs[t].T)
     ########
-    drs = dy + drs_next
+    dWry += np.dot(dy, rs[t].T)
+
+    drs = np.dot(Wry.T, dy) + drs_next
 
     dmemory = drs * mem_read_gate[t] + dmem_next
 
     #iface gates
-    dmem_write_gate = dmemory * (mem_new_content[t] - mem_erase_gate[t] * memory[t-1])
+    dmem_write_gate = dmemory * (mem_new_content[t] - mem_erase_gate[t] * memory[t-1]) # 1
+    # dmem_write_gate = dmemory * mem_new_content[t] # 2
     dmem_read_gate = drs * memory[t]
     dmem_new_content = dmemory * mem_write_gate[t]
+
     dmem_erase_gate = -dmemory * memory[t-1] * mem_write_gate[t]
     dmem_next = dmemory * (1 - mem_erase_gate[t] * mem_write_gate[t])
+
+    #  dmem_erase_gate = -dmemory * memory[t-1] # 2
+    #  dmem_next = dmemory * (1 - mem_erase_gate[t]) # 2
 
     # sigmoids
     dmem_read_gate = dmem_read_gate * mem_read_gate[t] * (1-mem_read_gate[t])
@@ -266,7 +278,7 @@ def lossFun(inputs, targets, cprev, hprev, mprev, rprev):
     dcnext = dc * gs[t][2*N:3*N,:]
   #  for dparam in [dWxh, dWhh, dWhy, dbh, dby]:
     #  np.clip(dparam, -5, 5, out=dparam) # clip to mitigate exploding gradients
-  return loss, dWxh, dWhh, dWhy, dWhr, dWhv, dWhw, dWhe, dWrh, dbh, dby, cs[len(inputs)-1], hs[len(inputs)-1]
+  return loss, dWxh, dWhh, dWhy, dWhr, dWhv, dWhw, dWhe, dWrh, dWry, dbh, dby, cs[len(inputs)-1], hs[len(inputs)-1]
 
 def sample(c, h, m, r, seed_ix, n):
   """
@@ -289,10 +301,11 @@ def sample(c, h, m, r, seed_ix, n):
     mem_write_gate = sigmoid(np.dot(Whw, h))
     mem_read_gate = sigmoid(np.dot(Whr, h))
     mem_erase_gate = sigmoid(np.dot(Whe, h))
-    m = m * (1-mem_erase_gate)
+    m = m * (1-mem_erase_gate * mem_write_gate) # 1
+    #  m = m * (1-mem_erase_gate) # 2
     m += mem_new_content * mem_write_gate
     r = m * mem_read_gate
-    y += r
+    y += np.dot(Wry, r)
     p = np.exp(y) / np.sum(np.exp(y))
     ix = np.random.choice(range(vocab_size), p=p.ravel())
     x = np.zeros((vocab_size, 1))
@@ -309,7 +322,7 @@ hprev = np.zeros((hidden_size,B), dtype=datatype)
 mprev = np.zeros((vocab_size,B), dtype=datatype)
 rprev = np.zeros((vocab_size,B), dtype=datatype)
 mWxh, mWhh, mWhy  = np.zeros_like(Wxh), np.zeros_like(Whh), np.zeros_like(Why)
-mWhr, mWhv, mWhw, mWhe, mWrh = np.zeros_like(Whr), np.zeros_like(Whv), np.zeros_like(Whw), np.zeros_like(Whe), np.zeros_like(Wrh)
+mWhr, mWhv, mWhw, mWhe, mWrh, mWry = np.zeros_like(Whr), np.zeros_like(Whv), np.zeros_like(Whw), np.zeros_like(Whe), np.zeros_like(Wrh), np.zeros_like(Wry)
 mbh, mby = np.zeros_like(bh), np.zeros_like(by) # memory variables for Adagrad
 smooth_loss = -np.log(1.0/vocab_size)*seq_length # loss at iteration 0
 start = time.time()
@@ -339,7 +352,7 @@ while t < T:
     gradCheck(inputs, targets, cprev, hprev, mprev, rprev)
 
   # forward seq_length characters through the net and fetch gradient
-  loss, dWxh, dWhh, dWhy, dWhr, dWhv, dWhw, dWhe, dWrh, dbh, dby, cprev, hprev = lossFun(inputs, targets, cprev, hprev, mprev, rprev)
+  loss, dWxh, dWhh, dWhy, dWhr, dWhv, dWhw, dWhe, dWrh, dWry, dbh, dby, cprev, hprev = lossFun(inputs, targets, cprev, hprev, mprev, rprev)
   smooth_loss = smooth_loss * 0.999 + np.mean(loss)/(np.log(2)*B) * 0.001
   interval = time.time() - last
 
@@ -353,9 +366,9 @@ while t < T:
     print '%.3f s, iter %d, %.4f BPC, %.2f char/s' % (t, n, smooth_loss / seq_length, (B*S*100)/tdelta) # print progress
 
   # perform parameter update with Adagrad
-  for param, dparam, mem in zip([Wxh, Whh, Why, Whr, Whv, Whw, Whe, Wrh, bh, by],
-                                [dWxh, dWhh, dWhy, dWhr, dWhv, dWhw, dWhe, dWrh, dbh, dby], 
-                                [mWxh, mWhh, mWhy, mWhr, mWhv, mWhw, mWhe, mWrh, mbh, mby]):
+  for param, dparam, mem in zip([Wxh, Whh, Why, Whr, Whv, Whw, Whe, Wrh, Wry, bh, by],
+                                [dWxh, dWhh, dWhy, dWhr, dWhv, dWhw, dWhe, dWrh, dWry, dbh, dby], 
+                                [mWxh, mWhh, mWhy, mWhr, mWhv, mWhw, mWhe, mWrh, mWry, mbh, mby]):
     mem += dparam * dparam
     param += -learning_rate * dparam / np.sqrt(mem + 1e-8) # adagrad update
 

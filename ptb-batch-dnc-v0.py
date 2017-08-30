@@ -80,8 +80,8 @@ def gradCheck(inputs, target, rprev, Mprev, cprev, hprev):
 
     mean_error /= num_checks
     print '%s:\n\t min %e, max %e, mean %e # %d/%d\n\n\tn = [%e, %e]\n\ta = [%e, %e]' % (name, min_error, max_error, mean_error, num_checks, valid_checks, min_numerical, max_numerical, min_analytic, max_analytic)
-      # rel_error should be on order of 1e-7 or less
     entry = '%s:\n\t min %e, max %e, mean %e # %d/%d\n\n\tn = [%e, %e]\n\ta = [%e, %e]\n' % (name, min_error, max_error, mean_error, num_checks, valid_checks, min_numerical, max_numerical, min_analytic, max_analytic)
+      # rel_error should be on order of 1e-7 or less
     with open(opt.gradcheck_fname, "a") as myfile: myfile.write(entry)
 
 
@@ -120,8 +120,8 @@ by = np.zeros((M, 1)) # output bias
 # external memory related
 # [R W E] = 3MW
 MR = 1 # number of read heads
-Whz = np.random.randn(MR + 1 + 2*MW, N)*0.01 # memory interface
-bz = np.zeros((MR + 1 + 2*MW, 1)) # memory interface bias
+Whz = np.random.randn(MW, N)*0.01 # memory interface
+bz = np.zeros((MW, 1)) # memory interface bias
 Wry = np.random.randn(M, MR*MW)*0.01 # read vector -> y
 # i o f c
 # init f gates biases higher
@@ -169,10 +169,10 @@ def lossFun(inputs, targets, rprev, Mprev, cprev, hprev):
     ### external memory control
     # interface vector
     zs[t] = np.dot(Whz, hs[t]) + bz
-    rbetas[t] = sigmoid(zs[t][0:MR, :]) # R read strengths (R values)
-    wbetas[t] = sigmoid(zs[t][MR:MR+1])
-    print "---"
-    print wbetas[t]
+    #rbetas[t] = (zs[t][0:MR, :]) # R read strengths (R values)
+    #wbetas[t] = (zs[t][MR:MR+1]) # write strength
+    #wvs[t] = zs[t] # write strength
+
     #wes[t] = sigmoid(zs[t][MR+1:MR+1+MW, :]) # erase vector (W values)
     #wvs[t] = zs[t][MR+1+MW:MR+1+2*MW, :] # write vector (W values)
 
@@ -181,10 +181,11 @@ def lossFun(inputs, targets, rprev, Mprev, cprev, hprev):
     #wws[t] = sigmoid(wbetas[t]) # write weight vectors
 
     # external memory state update
-    Ms[t] = Ms[t-1] * (1) # * wes[t] # + np.dot(wws[t], wvs[t].T).T
-    rs[t] = Ms[t] * rbetas[t] # read vector
-
-    ys[t] = vs[t] + np.dot(Wry, rs[t])
+    #Ms[t] = wvs[t] * wbetas[t]    # * wes[t] # + np.dot(wws[t], wvs[t].T).T
+    wvs[t] = zs[t]
+    rs[t] = wvs[t]     # read vector
+    Ms[t] = Ms[t-1]
+    ys[t] = vs[t]# + np.dot(Wry, zs[t])
     ps[t] = np.exp(ys[t]) / np.sum(np.exp(ys[t]), axis=0) # probabilities for next chars
 
     #debug
@@ -217,21 +218,31 @@ def lossFun(inputs, targets, rprev, Mprev, cprev, hprev):
 
   for t in reversed(xrange(len(inputs))):
     dy = np.copy(ps[t])
+
     for b in range(0,B):
         dy[targets[t][b], b] -= 1 # backprop into y. see http://cs231n.github.io/neural-networks-case-study/#grad if confused here
     dWhy += np.dot(dy, hs[t].T)
     dby += np.expand_dims(np.sum(dy,axis=1), axis=1)
 
-    dWry += np.dot(dy, rs[t].T)
-    drs = np.dot(Wry.T, dy)
-    drbetas = np.dot(Ms[t].T, drs)
+    #dWry += np.dot(dy, rs[t].T)
+    #dz = np.dot(Wry.T, dy)
+    #drbetas = np.sum(Ms[t] * drs, axis=0)
+    #dm = rbetas[t] * drs
+    #dwbetas = np.sum(wvs[t] * dm, axis=0)
+    #dvws = drs #wbetas[t] * dm
 
-    dz[0:MR,:] = drbetas * rbetas[t] * (1-rbetas[t])
+    #dm = drs * rbetas[t] + dmnext
+    #debetas = np.sum(Ms[t-1] * dm, axis=0)
+    #print rbetas[t].shape
+    #print drbetas.shape
+    #dz[0:MR,:] = drbetas# * rbetas[t] * (1-rbetas[t])
+    #dz[MR:MR+1,:] = dwbetas# * wbetas[t] * (1-wbetas[t])
+    #dz = np.zeros_like(zs[0])
+    #dz = dvws# * wvs[t] * (1-wvs[t])
+    #dWhz += np.dot(dz, hs[t].T)
+    #dbz += np.expand_dims(np.sum(dz, axis=1), axis=1)
 
-    dWhz += np.dot(dz, hs[t].T)
-    dbz += np.expand_dims(np.sum(dz, axis=1), axis=1)
-
-    dh = np.dot(Why.T, dy) + np.dot(Whz.T, dz) + dhnext # backprop into h
+    dh = np.dot(Why.T, dy) + dhnext # backprop into h
 
     dc = dh * gs[t][N:2*N,:] + dcnext # backprop into c
     dc = dc * (1 - cs[t] * cs[t]) # backprop though tanh
@@ -303,8 +314,6 @@ while t < T:
         cprev[:,b] = np.zeros(hidden_size) # reset LSTM memory
         hprev[:,b] = np.zeros(hidden_size) # reset hidden memory
         p[b] = np.random.randint(len(data)-1-S)
-        print p[b]
-        print Mprev
       inputs[:,b] = [char_to_ix[ch] for ch in data[p[b]:p[b]+seq_length]]
       targets[:,b] = [char_to_ix[ch] for ch in data[p[b]+1:p[b]+seq_length+1]]
 
@@ -320,7 +329,7 @@ while t < T:
 
   # forward seq_length characters through the net and fetch gradient
   loss, dWxh, dWhh, dWhy, dWhz, dWry, dbh, dby, dbz, rprev, Mprev, cprev, hprev = lossFun(inputs, targets, rprev, Mprev, cprev, hprev)
-  smooth_loss = smooth_loss * 0.999 + np.mean(loss)/np.log(2) * 0.001
+  smooth_loss = smooth_loss * 0.999 + np.mean(loss)/(np.log(2)*B) * 0.001
   interval = time.time() - last
 
   if n % opt.BPC_interval == 0 and n > 0:
@@ -337,7 +346,7 @@ while t < T:
                                 [dWxh, dWhh, dWhy, dWhz, dWry, dbh, dby, dbz], 
                                 [mWxh, mWhh, mWhy, mWhz, mWry, mbh, mby, mbz]):
     mem += dparam * dparam
-    param += -learning_rate * dparam / np.sqrt(mem + 1e-8) # adagrad update
+    #param += -learning_rate * dparam / np.sqrt(mem + 1e-8) # adagrad update
 
   for b in range(0,B): p[b] += seq_length # move data pointer
   n += 1 # iteration counter

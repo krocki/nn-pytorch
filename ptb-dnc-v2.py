@@ -90,7 +90,7 @@ with open(logname, "a") as myfile:
     myfile.write("\n#  ITER\t\tTIME\t\tTRAIN LOSS\n")
 
 # data I/O
-data = open('./ptb/ptb.train.txt', 'r').read() # should be simple plain text file
+data = open('./enwik8', 'r').read() # should be simple plain text file
 chars = list(set(data))
 data_size, vocab_size = len(data), len(chars)
 print 'data has %d characters, %d unique.' % (data_size, vocab_size)
@@ -324,7 +324,7 @@ while t < T:
       if p[b]+seq_length+1 >= len(data) or n == 0:
         cprev[:,b] = np.zeros(hidden_size, dtype=datatype) # reset LSTM memory
         hprev[:,b] = np.zeros(hidden_size, dtype=datatype) # reset hidden memory
-        mprev[:,b] = np.random.randn(vocab_size).astype(datatype) # reset ext memory
+        mprev[:,b] = np.zeros(vocab_size, dtype=datatype) # reset ext memory
         rprev[:,b] = np.zeros(vocab_size, dtype=datatype) # reset read vec memory
         p[b] = np.random.randint(len(data)-1-S)
 
@@ -333,7 +333,7 @@ while t < T:
 
   # sample from the model now and then
   if n % 5000 == 100 and n > 0:
-    sample_ix = sample(np.expand_dims(cprev[:,0], axis=1), np.expand_dims(hprev[:,0], axis=1), np.expand_dims(mprev[:,0], axis=1), np.expand_dims(rprev[:,0], axis=1), inputs[0], 500)
+    sample_ix = sample(np.expand_dims(cprev[:,0], axis=1), np.expand_dims(hprev[:,0], axis=1), np.expand_dims(mprev[:,0], axis=1), np.expand_dims(rprev[:,0], axis=1), inputs[0], 1000)
     txt = ''.join(ix_to_char[ix] for ix in sample_ix)
     print '----\n %s \n----' % (txt, )
     entry = '%s\n' % (txt)
