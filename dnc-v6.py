@@ -92,8 +92,8 @@ with open(logname, "a") as myfile:
     myfile.write("\n#  ITER\t\tTIME\t\tTRAIN LOSS\n")
 
 # data I/O
-data = open('./ptb/ptb.train.txt', 'r').read() # should be simple plain text file
-#data = open('./alice29.txt', 'r').read()
+#  data = open('./ptb/ptb.train.txt', 'r').read() # should be simple plain text file
+data = open('./alice29.txt', 'r').read()
 chars = list(set(data))
 data_size, vocab_size = len(data), len(chars)
 print 'data has %d characters, %d unique.' % (data_size, vocab_size)
@@ -101,35 +101,32 @@ char_to_ix = { ch:i for i,ch in enumerate(chars) }
 ix_to_char = { i:ch for i,ch in enumerate(chars) }
 
 # hyperparameters
-hidden_size = opt.hidden # size of hidden layer of neurons
-seq_length = opt.seqlength # number of steps to unroll the RNN for
+HN = opt.hidden # size of hidden layer of neurons
+S = opt.seqlength # number of steps to unroll the RNN for
 learning_rate = 1e-1
 B = opt.batchsize
 
 # model parameters
-Wxh = np.random.randn(4*hidden_size, vocab_size).astype(datatype)*0.01 # input to hidden
-Whh = np.random.randn(4*hidden_size, hidden_size).astype(datatype)*0.01 # hidden to hidden
-Why = np.random.randn(vocab_size, hidden_size).astype(datatype)*0.01 # hidden to output
-bh = np.zeros((4*hidden_size, 1), dtype = datatype) # hidden bias
+Wxh = np.random.randn(4*HN, vocab_size).astype(datatype)*0.01 # input to hidden
+Whh = np.random.randn(4*HN, HN).astype(datatype)*0.01 # hidden to hidden
+Why = np.random.randn(vocab_size, HN).astype(datatype)*0.01 # hidden to output
+bh = np.zeros((4*HN, 1), dtype = datatype) # hidden bias
 by = np.zeros((vocab_size, 1), dtype = datatype) # output bias
 
 # external memory
 read_heads = 1 # paper - R
-mem_width = 16 # paper - W
-mem_locations = 8 # paper - N
-
-Wrh = np.random.randn(4*hidden_size, mem_width).astype(datatype)*0.01 # read vector to hidden
-Whv = np.random.randn(mem_width, hidden_size).astype(datatype)*0.01 # write content
-Whr = np.random.randn(mem_locations, hidden_size).astype(datatype)*0.01 # read strength
-Whw = np.random.randn(mem_locations, hidden_size).astype(datatype)*0.01 # write strength
-Whe = np.random.randn(mem_width, hidden_size).astype(datatype)*0.01 # erase strength
-Wry = np.random.randn(vocab_size, read_heads * mem_width).astype(datatype)*0.01 # erase strength
-
-N = hidden_size
+MW = 1 # paper - W
+MN = 74 # paper - N
+N = HN
 M = vocab_size
-MN = mem_locations
-MW = mem_width
 MR = read_heads
+
+Wrh = np.random.randn(4*HN, MW).astype(datatype)*0.01 # read vector to hidden
+Whv = np.random.randn(MW, HN).astype(datatype)*0.01 # write content
+Whr = np.random.randn(MN, HN).astype(datatype)*0.01 # read strength
+Whw = np.random.randn(MN, HN).astype(datatype)*0.01 # write strength
+Whe = np.random.randn(MW, HN).astype(datatype)*0.01 # erase strength
+Wry = np.random.randn(vocab_size, read_heads * MW).astype(datatype)*0.01 # erase strength
 
 # i o f c
 # init f gates biases higher
@@ -183,24 +180,6 @@ def lossFun(inputs, targets, cprev, hprev, mprev, rprev):
     mem_read_gate[t] = sigmoid(mem_read_key[t])
     mem_erase_gate[t] = sigmoid(np.dot(Whe, hs[t]))
     ######
-    #  print "new"
-    #  print mem_new_content[t].shape
-    #  print mem_new_content[t]
-    #  print "erase"
-    #  print mem_erase_gate[t].shape
-    #  print mem_erase_gate[t]
-    #  print "read"
-    #  print mem_read_gate[t].shape
-    #  print mem_read_gate[t]
-    #  print "write"
-    #  print mem_write_gate[t].shape
-    #  print mem_write_gate[t]
-    #  print "erase"
-    #  print mem_erase_gate[t].shape
-    #  print mem_erase_gate[t]
-    #  print "memory"
-    #  print memory[t-1].shape
-    #  print (1 - np.reshape(mem_erase_gate[t], (1, MW, B)) * np.reshape(mem_write_gate[t], (MN, 1, B))) 
 
     memory[t] = memory[t-1] * (1 - np.reshape(mem_erase_gate[t], (1, MW, B)) * np.reshape(mem_write_gate[t], (MN, 1, B)))
     memory[t] += np.reshape(mem_new_content[t], (1, MW, B)) * np.reshape(mem_write_gate[t], (MN, 1, B))
@@ -232,7 +211,7 @@ def lossFun(inputs, targets, cprev, hprev, mprev, rprev):
   dmem_next = np.zeros_like(memory[0])
   drs_next = np.zeros_like(rs[0])
   dg = np.zeros_like(gs[0])
-  W_ones = np.ones((mem_width,1))
+  W_ones = np.ones((MW,1))
 
   for t in reversed(xrange(len(inputs))):
     dy = np.copy(ps[t])
@@ -340,30 +319,30 @@ n = 0
 p = np.random.randint(len(data)-1-S,size=(B)).tolist()
 inputs = np.zeros((S,B), dtype=int)
 targets = np.zeros((S,B), dtype=int)
-cprev = np.zeros((hidden_size,B), dtype=datatype)
-hprev = np.zeros((hidden_size,B), dtype=datatype)
+cprev = np.zeros((HN,B), dtype=datatype)
+hprev = np.zeros((HN,B), dtype=datatype)
 mprev = np.zeros((MN,MW,B), dtype=datatype)
 rprev = np.zeros((MW,B), dtype=datatype)
 mWxh, mWhh, mWhy  = np.zeros_like(Wxh), np.zeros_like(Whh), np.zeros_like(Why)
 mWhr, mWhv, mWhw, mWhe, mWrh, mWry = np.zeros_like(Whr), np.zeros_like(Whv), np.zeros_like(Whw), np.zeros_like(Whe), np.zeros_like(Wrh), np.zeros_like(Wry)
 mbh, mby = np.zeros_like(bh), np.zeros_like(by) # memory variables for Adagrad
-smooth_loss = -np.log(1.0/vocab_size)*seq_length # loss at iteration 0
+smooth_loss = -np.log(1.0/vocab_size)*S # loss at iteration 0
 start = time.time()
 
 t = time.time()-start
 last=start
 while t < T:
-  # prepare inputs (we're sweeping from left to right in steps seq_length long)
+  # prepare inputs (we're sweeping from left to right in steps S long)
   for b in range(0,B):
-      if p[b]+seq_length+1 >= len(data) or n == 0:
-        cprev[:,b] = np.zeros(hidden_size, dtype=datatype) # reset LSTM memory
-        hprev[:,b] = np.zeros(hidden_size, dtype=datatype) # reset hidden memory
+      if p[b]+S+1 >= len(data) or n == 0:
+        cprev[:,b] = np.zeros(HN, dtype=datatype) # reset LSTM memory
+        hprev[:,b] = np.zeros(HN, dtype=datatype) # reset hidden memory
         mprev[:,:,b] = np.zeros((MN,MW), dtype=datatype) # reset ext memory
-        rprev[:,b] = np.zeros(mem_width, dtype=datatype) # reset read vec memory
+        rprev[:,b] = np.zeros(MW, dtype=datatype) # reset read vec memory
         p[b] = np.random.randint(len(data)-1-S)
 
-      inputs[:,b] = [char_to_ix[ch] for ch in data[p[b]:p[b]+seq_length]]
-      targets[:,b] = [char_to_ix[ch] for ch in data[p[b]+1:p[b]+seq_length+1]]
+      inputs[:,b] = [char_to_ix[ch] for ch in data[p[b]:p[b]+S]]
+      targets[:,b] = [char_to_ix[ch] for ch in data[p[b]+1:p[b]+S+1]]
 
   # sample from the model now and then
   if n % opt.check_interval == 200 and n > 0:
@@ -374,7 +353,7 @@ while t < T:
     with open(samplelogname, "w") as myfile: myfile.write(entry)
     gradCheck(inputs, targets, cprev, hprev, mprev, rprev)
 
-  # forward seq_length characters through the net and fetch gradient
+  # forward S characters through the net and fetch gradient
   loss, dWxh, dWhh, dWhy, dWhr, dWhv, dWhw, dWhe, dWrh, dWry, dbh, dby, cprev, hprev = lossFun(inputs, targets, cprev, hprev, mprev, rprev)
   smooth_loss = smooth_loss * 0.999 + np.mean(loss)/(np.log(2)*B) * 0.001
   interval = time.time() - last
@@ -383,10 +362,10 @@ while t < T:
     tdelta = time.time()-last
     last = time.time()
     t = time.time()-start
-    entry = '{:5}\t\t{:3f}\t{:3f}\n'.format(n, t, smooth_loss/seq_length)
+    entry = '{:5}\t\t{:3f}\t{:3f}\n'.format(n, t, smooth_loss/S)
     with open(logname, "a") as myfile: myfile.write(entry)
 
-    print '%.3f s, iter %d, %.4f BPC, %.2f char/s' % (t, n, smooth_loss / seq_length, (B*S*100)/tdelta) # print progress
+    print '%.3f s, iter %d, %.4f BPC, %.2f char/s' % (t, n, smooth_loss / S, (B*S*100)/tdelta) # print progress
   for param, dparam, mem in zip([Wxh, Whh, Why, Whr, Whv, Whw, Whe, Wrh, Wry, bh, by],
                                 [dWxh, dWhh, dWhy, dWhr, dWhv, dWhw, dWhe, dWrh, dWry, dbh, dby], 
                                 [mWxh, mWhh, mWhy, mWhr, mWhv, mWhw, mWhe, mWrh, mWry, mbh, mby]):
@@ -394,5 +373,5 @@ while t < T:
    mem += dparam * dparam
    param += -learning_rate * dparam / np.sqrt(mem + 1e-8) # adagrad update
 
-  for b in range(0,B): p[b] += seq_length # move data pointer
+  for b in range(0,B): p[b] += S # move data pointer
   n += 1 # iteration counter
