@@ -6,6 +6,7 @@ import argparse, sys
 import datetime, time
 import random
 from random import uniform
+import matplotlib.pyplot as plt
 
 def sigmoid(x): return 1.0 / (1.0 + np.exp(-x))
 def oneplus(x): return 1.0 + np.log(1.0 + np.exp(x))
@@ -92,8 +93,8 @@ with open(logname, "a") as myfile:
     myfile.write("\n#  ITER\t\tTIME\t\tTRAIN LOSS\n")
 
 # data I/O
-#  data = open('./ptb/ptb.train.txt', 'r').read() # should be simple plain text file
-data = open('./alice29.txt', 'r').read()
+data = open('./ptb/ptb.train.txt', 'r').read() # should be simple plain text file
+#data = open('./alice29.txt', 'r').read()
 chars = list(set(data))
 data_size, vocab_size = len(data), len(chars)
 print 'data has %d characters, %d unique.' % (data_size, vocab_size)
@@ -115,8 +116,8 @@ by = np.zeros((vocab_size, 1), dtype = datatype) # output bias
 
 # external memory
 read_heads = 1 # paper - R
-MW = 1 # paper - W
-MN = 74 # paper - N
+MW = 8 # paper - W
+MN = 4 # paper - N
 N = HN
 M = vocab_size
 MR = read_heads
@@ -132,7 +133,7 @@ Wry = np.random.randn(vocab_size, read_heads * MW).astype(datatype)*0.01 # erase
 # init f gates biases higher
 bh[2*N:3*N,:] = 1
 
-def lossFun(inputs, targets, cprev, hprev, mprev, rprev):
+def lossFun(inputs, targets, cprev, hprev, mprev, rprev, plot=False):
   """
   inputs,targets are both list of integers.
   cprev is HxB array of initial memory cell state
@@ -162,23 +163,30 @@ def lossFun(inputs, targets, cprev, hprev, mprev, rprev):
     # gates nonlinear part
     gs[t][0:3*N,:] = sigmoid(gs[t][0:3*N,:]) #i, o, f gates
     gs[t][3*N:4*N, :] = np.tanh(gs[t][3*N:4*N,:]) #c gate
+
     #mem(t) = c gate * i gate + f gate * mem(t-1)
     cs[t] = gs[t][3*N:4*N,:] * gs[t][0:N,:] + gs[t][2*N:3*N,:] * cs[t-1]
     cs[t] = np.tanh(cs[t]) # mem cell - nonlinearity
     hs[t] = gs[t][N:2*N,:] * cs[t] # new hidden state
     ys[t] = np.dot(Why, hs[t]) + by # unnormalized log probabilities for next chars
 
-    # paper - ys[t] - Upsilon(t)
-
     ##### external mem ########
-    ## paper - xi - controller outputs for memory interface
     mem_read_key[t] = np.dot(Whr, hs[t]) # key used for content based read
     mem_write_key[t] = np.dot(Whw, hs[t]) # key used for content based read
 
     mem_new_content[t] = np.dot(Whv, hs[t])
-    mem_write_gate[t] = sigmoid(mem_write_key[t])
-    mem_read_gate[t] = sigmoid(mem_read_key[t])
+    mem_write_gate[t] = mem_write_key[t]
+    mem_read_gate[t] = mem_read_key[t]
     mem_erase_gate[t] = sigmoid(np.dot(Whe, hs[t]))
+
+    #softmax on read and write gates
+    mem_write_gate[t] = np.exp(mem_write_gate[t])
+    mem_write_gate_sum = np.sum(mem_write_gate[t], axis=0)
+    mem_write_gate[t] = mem_write_gate[t]/mem_write_gate_sum
+
+    mem_read_gate[t] = np.exp(mem_read_gate[t])
+    mem_read_gate_sum = np.sum(mem_read_gate[t], axis=0)
+    mem_read_gate[t] = mem_read_gate[t]/mem_read_gate_sum
     ######
 
     memory[t] = memory[t-1] * (1 - np.reshape(mem_erase_gate[t], (1, MW, B)) * np.reshape(mem_write_gate[t], (MN, 1, B)))
@@ -195,8 +203,8 @@ def lossFun(inputs, targets, cprev, hprev, mprev, rprev):
     ps[t] = np.exp(ys[t]) / np.sum(np.exp(ys[t]), axis=0) # probabilities for next chars
 
     for b in range(0,B):
-        if ps[t][targets[t,b],b] > 0:
-            loss += -np.log(ps[t][targets[t,b],b]) # softmax (cross-entropy loss)
+        if ps[t][targets[t,b],b] > 0: loss += -np.log(ps[t][targets[t,b],b]) # softmax (cross-entropy loss)
+
   # backward pass: compute gradients going backwards
   dWxh, dWhh, dWhy = np.zeros_like(Wxh), np.zeros_like(Whh), np.zeros_like(Why )
 
@@ -217,12 +225,6 @@ def lossFun(inputs, targets, cprev, hprev, mprev, rprev):
     dy = np.copy(ps[t])
     for b in range(0,B): dy[targets[t][b], b] -= 1 # backprop into y
     dWhy += np.dot(dy, hs[t].T)
-    #  print "rs"
-    #  print rs[t].shape
-    #  print rs[t]
-    #  print "mem_read_gate"
-    #  print mem_read_gate[t].shape
-    #  print mem_read_gate[t]
 
     ##external######
     dWry += np.dot(dy, rs[t].T)
@@ -231,15 +233,26 @@ def lossFun(inputs, targets, cprev, hprev, mprev, rprev):
 
     #iface gates
     dmem_write_gate = np.dot(W_ones.T, dmemory * (mem_new_content[t] - mem_erase_gate[t] * memory[t-1])) # 1
+
     dmem_read_gate = np.dot(W_ones.T, drs * memory[t])
+
+    # propagate back through softmax
+    dmem_write_gate = dmem_write_gate * mem_write_gate[t]
+    dmem_write_gate_sum = np.sum(dmem_write_gate, axis=1)
+    dmem_write_gate -= mem_write_gate[t] * dmem_write_gate_sum
+
+    dmem_read_gate = dmem_read_gate * mem_read_gate[t]
+    dmem_read_gate_sum = np.sum(dmem_read_gate, axis=1)
+    dmem_read_gate -= mem_read_gate[t] * dmem_read_gate_sum
+
     dmem_new_content = dmemory * np.reshape(mem_write_gate[t], (MN, 1, B))
 
     dmem_erase_gate = -dmemory * memory[t-1] * np.reshape(mem_write_gate[t], (MN, 1, B))
     dmem_next = dmemory * (1 - np.reshape(mem_erase_gate[t], (1, MW, B)) * np.reshape(mem_write_gate[t], (MN,1,B)))
 
     # sigmoids
-    dmem_read_key = dmem_read_gate * mem_read_gate[t] * (1-mem_read_gate[t])
-    dmem_write_key = dmem_write_gate * mem_write_gate[t] * (1-mem_write_gate[t])
+    dmem_read_key = dmem_read_gate #
+    dmem_write_key = dmem_write_gate #
     dmem_erase_gate = dmem_erase_gate * mem_erase_gate[t] * (1-mem_erase_gate[t])
 
     #  print "mem_erase_key"
@@ -277,6 +290,25 @@ def lossFun(inputs, targets, cprev, hprev, mprev, rprev):
     dhnext = np.dot(Whh.T, dg)
     drs_next = np.dot(Wrh.T, dg)
     dcnext = dc * gs[t][2*N:3*N,:]
+    #  if plot:
+        #  _b_ = 1 # sequence number
+        #  plt.subplot(2,1,1)
+        #  plt.imshow(memory[10][:,:,_b_])
+        #  plt.colorbar()
+        #  plt.title('memory state')
+        #  plt.subplot(2,1,2)
+        #  read_gates_history = np.zeros((S, MN))
+        #  for i in range(0,S): read_gates_history[i,:] = mem_read_gate[i][:,_b_]
+        #  plt.imshow(read_gates_history.T)
+        #  cbar = plt.colorbar()
+        #  cbar.ax.get_yaxis().labelpad = 20
+        #  cbar.ax.set_ylabel('activation', rotation=270)
+        #  plt.ylabel('location')
+        #  plt.yticks(np.arange(0, MN))
+        #  plt.xlabel('time step')
+        #  plt.title('mem read gate in time')
+        #  plt.show()
+        #  plot = False
     #for dparam in [dWxh, dWhh, dWhy, dWhr, dWhv, dWhw, dWhe, dWrh, dWry, dbh, dby]:
     #  np.clip(dparam, -5, 5, out=dparam) # clip to mitigate exploding gradients
   return loss, dWxh, dWhh, dWhy, dWhr, dWhv, dWhw, dWhe, dWrh, dWry, dbh, dby, cs[len(inputs)-1], hs[len(inputs)-1]
@@ -354,7 +386,8 @@ while t < T:
     gradCheck(inputs, targets, cprev, hprev, mprev, rprev)
 
   # forward S characters through the net and fetch gradient
-  loss, dWxh, dWhh, dWhy, dWhr, dWhv, dWhw, dWhe, dWrh, dWry, dbh, dby, cprev, hprev = lossFun(inputs, targets, cprev, hprev, mprev, rprev)
+  plot = n % opt.check_interval == 200 and n > 0
+  loss, dWxh, dWhh, dWhy, dWhr, dWhv, dWhw, dWhe, dWrh, dWry, dbh, dby, cprev, hprev = lossFun(inputs, targets, cprev, hprev, mprev, rprev, plot)
   smooth_loss = smooth_loss * 0.999 + np.mean(loss)/(np.log(2)*B) * 0.001
   interval = time.time() - last
 
