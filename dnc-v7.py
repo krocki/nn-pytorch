@@ -9,7 +9,6 @@ from random import uniform
 #import matplotlib.pyplot as plt
 
 def sigmoid(x): return 1.0 / (1.0 + np.exp(-x))
-def oneplus(x): return 1.0 + np.log(1.0 + np.exp(x))
 
 ### parse args
 parser = argparse.ArgumentParser(description='')
@@ -116,8 +115,8 @@ by = np.zeros((vocab_size, 1), dtype = datatype) # output bias
 
 # external memory
 read_heads = 1 # paper - R
-MW = 8 # paper - W
-MN = 4 # paper - N
+MW = 10 # paper - W
+MN = 5 # paper - N
 N = HN
 M = vocab_size
 MR = read_heads
@@ -250,8 +249,7 @@ def lossFun(inputs, targets, cprev, hprev, mprev, rprev, plot=False):
     dmem_erase_gate = -dmemory * memory[t-1] * np.reshape(mem_write_gate[t], (MN, 1, B))
     dmem_next = dmemory * (1 - np.reshape(mem_erase_gate[t], (1, MW, B)) * np.reshape(mem_write_gate[t], (MN,1,B)))
 
-    # sigmoids
-    dmem_read_key = dmem_read_gate #
+    dmem_read_key = dmem_read_gate
     dmem_write_key = dmem_write_gate #
     dmem_erase_gate = dmem_erase_gate * mem_erase_gate[t] * (1-mem_erase_gate[t])
 
@@ -378,11 +376,11 @@ while t < T:
 
   # sample from the model now and then
   if n % opt.check_interval == 200 and n > 0:
-    sample_ix = sample(np.expand_dims(cprev[:,0], axis=1), np.expand_dims(hprev[:,0], axis=1), (mprev[:,:,0]), np.expand_dims(rprev[:,0], axis=1), inputs[0], opt.sample_length)
-    txt = ''.join(ix_to_char[ix] for ix in sample_ix)
-    print '----\n %s \n----' % (txt, )
-    entry = '%s\n' % (txt)
-    with open(samplelogname, "w") as myfile: myfile.write(entry)
+    #  sample_ix = sample(np.expand_dims(cprev[:,0], axis=1), np.expand_dims(hprev[:,0], axis=1), (mprev[:,:,0]), np.expand_dims(rprev[:,0], axis=1), inputs[0], opt.sample_length)
+    #  txt = ''.join(ix_to_char[ix] for ix in sample_ix)
+    #  print '----\n %s \n----' % (txt, )
+    #  entry = '%s\n' % (txt)
+    #  with open(samplelogname, "w") as myfile: myfile.write(entry)
     gradCheck(inputs, targets, cprev, hprev, mprev, rprev)
 
   # forward S characters through the net and fetch gradient
