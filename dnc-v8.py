@@ -9,7 +9,8 @@ from random import uniform
 #import matplotlib.pyplot as plt
 
 def sigmoid(x): return 1.0 / (1.0 + np.exp(-x))
-
+def fun_key_simil(C, K): return np.dot(C, K)
+def dfun_key_simil(C, dsim): return np.dot(C.T, dsim)
 ### parse args
 parser = argparse.ArgumentParser(description='')
 parser.add_argument('--fname', type=str, default = './logs/' + sys.argv[0] + '.dat', help='log filename')
@@ -124,9 +125,10 @@ MR = read_heads
 Wrh = np.random.randn(4*HN, MW).astype(datatype)*0.01 # read vector to hidden
 Whv = np.random.randn(MW, HN).astype(datatype)*0.01 # write content
 Whr = np.random.randn(MW, HN).astype(datatype)*0.01 # read strength
-Whw = np.random.randn(MN, HN).astype(datatype)*0.01 # write strength
+Whw = np.random.randn(MW, HN).astype(datatype)*0.01 # write strength
 Whe = np.random.randn(MW, HN).astype(datatype)*0.01 # erase strength
 Wry = np.random.randn(vocab_size, read_heads * MW).astype(datatype)*0.01 # erase strength
+Wkc = np.random.randn(MN,MW)*0.1
 
 # i o f c
 # init f gates biases higher
@@ -174,10 +176,8 @@ def lossFun(inputs, targets, cprev, hprev, mprev, rprev, plot=False):
     mem_write_key[t] = np.dot(Whw, hs[t]) # key used for content based read
 
     mem_new_content[t] = np.dot(Whv, hs[t])
-    mem_write_gate[t] = mem_write_key[t]
-    mem_read_gate[t] = mem_read_key[t]
-    print mem_read_key[t].shape
-    print memory[t-1].shape
+    mem_write_gate[t] = fun_key_simil(Wkc, mem_write_key[t])
+    mem_read_gate[t] = fun_key_simil(Wkc, mem_read_key[t])
     mem_erase_gate[t] = sigmoid(np.dot(Whe, hs[t]))
 
     #softmax on read and write gates
@@ -251,16 +251,14 @@ def lossFun(inputs, targets, cprev, hprev, mprev, rprev, plot=False):
     dmem_erase_gate = -dmemory * memory[t-1] * np.reshape(mem_write_gate[t], (MN, 1, B))
     dmem_next = dmemory * (1 - np.reshape(mem_erase_gate[t], (1, MW, B)) * np.reshape(mem_write_gate[t], (MN,1,B)))
 
-    dmem_read_key = dmem_read_gate
-    dmem_write_key = dmem_write_gate #
+    #  dmem_read_key = dmem_read_gate
     dmem_erase_gate = dmem_erase_gate * mem_erase_gate[t] * (1-mem_erase_gate[t])
+    
+    dmem_write_key = dfun_key_simil(Wkc, np.reshape(dmem_write_gate, (MN,B)))
+    dmem_read_key = dfun_key_simil(Wkc, np.reshape(dmem_read_gate, (MN, B)))
 
-    #  print "mem_erase_key"
-    #  print dmem_erase_gate.shape
-    #  print dmem_erase_gate
-    # linearities
-    dWhw += np.dot(np.reshape(dmem_write_key, (MN, B)), hs[t].T)
-    dWhr += np.dot(np.reshape(dmem_read_key, (MN,B)), hs[t].T)
+    dWhw += np.dot(np.reshape(dmem_write_key, (MW, B)), hs[t].T)
+    dWhr += np.dot(np.reshape(dmem_read_key, (MW,B)), hs[t].T)
     dWhe += np.dot(np.sum(dmem_erase_gate, axis=0), hs[t].T)
     dWhv += np.dot(np.sum(dmem_new_content, axis=0), hs[t].T)
     ########
@@ -268,8 +266,8 @@ def lossFun(inputs, targets, cprev, hprev, mprev, rprev, plot=False):
     dby += np.expand_dims(np.sum(dy,axis=1), axis=1)
     dh = np.dot(Why.T, dy) + dhnext # backprop into h
 
-    dh += np.dot(Whw.T, np.reshape(dmem_write_key, (MN,B)))
-    dh += np.dot(Whr.T, np.reshape(dmem_read_key, (MN,B)))
+    dh += np.dot(Whw.T, np.reshape(dmem_write_key, (MW,B)))
+    dh += np.dot(Whr.T, np.reshape(dmem_read_key, (MW,B)))
     dh += np.dot(Whe.T, np.sum(dmem_erase_gate, axis=0))
     dh += np.dot(Whv.T, np.sum(dmem_new_content, axis=0))
     # external end ###
