@@ -116,8 +116,8 @@ by = np.zeros((vocab_size, 1), dtype = datatype) # output bias
 
 # external memory
 read_heads = 1 # paper - R
-MW = 15 # paper - W
-MN = 10 # paper - N
+MW = 5 # paper - W
+MN = 3 # paper - N
 N = HN
 M = vocab_size
 MR = read_heads
@@ -128,7 +128,11 @@ Whr = np.random.randn(MW, HN).astype(datatype)*0.01 # read strength
 Whw = np.random.randn(MW, HN).astype(datatype)*0.01 # write strength
 Whe = np.random.randn(MW, HN).astype(datatype)*0.01 # erase strength
 Wry = np.random.randn(vocab_size, read_heads * MW).astype(datatype)*0.01 # erase strength
-Wkc = np.random.randn(B*MN,MW)*0.1
+Wkc = {}
+
+#TODO
+for b in range(0,B):
+    Wkc[b] = np.random.randn(MN,MW)*0.1
 
 # i o f c
 # init f gates biases higher
@@ -149,6 +153,12 @@ def lossFun(inputs, targets, cprev, hprev, mprev, rprev, plot=False):
   mem_read_key, mem_write_key = {}, {}
   #init previous states
   hs[-1], cs[-1], rs[-1], memory[-1] = np.copy(hprev), np.copy(cprev), np.copy(rprev), np.copy(mprev)
+
+  for t in xrange(len(inputs)):
+      mem_write_gate[t] = np.zeros((MN,B), dtype=datatype)
+      mem_read_gate[t] = np.zeros((MN,B), dtype=datatype)
+  dmem_write_key = np.zeros((MW,B), dtype=datatype)
+  dmem_read_key = np.zeros((MW,B), dtype=datatype)
 
   loss = 0
   # forward pass
@@ -176,8 +186,11 @@ def lossFun(inputs, targets, cprev, hprev, mprev, rprev, plot=False):
     mem_write_key[t] = np.dot(Whw, hs[t]) # key used for content based read
 
     mem_new_content[t] = np.dot(Whv, hs[t])
-    mem_write_gate[t] = np.dot(Wkc, mem_write_key[t])
-    mem_read_gate[t] = np.dot(Wkc, mem_read_key[t])
+
+    for b in range(0,B):
+        mem_write_gate[t][:,b,None] = np.dot(Wkc[b], mem_write_key[t][:,b,None])
+        mem_read_gate[t][:,b,None] = np.dot(Wkc[b], mem_read_key[t][:,b,None])
+
     mem_erase_gate[t] = sigmoid(np.dot(Whe, hs[t]))
 
     #softmax on read and write gates
@@ -254,8 +267,12 @@ def lossFun(inputs, targets, cprev, hprev, mprev, rprev, plot=False):
     #  dmem_read_key = dmem_read_gate
     dmem_erase_gate = dmem_erase_gate * mem_erase_gate[t] * (1-mem_erase_gate[t])
 
-    dmem_write_key = np.dot(Wkc.T, np.reshape(dmem_write_gate, (MN,B)))
-    dmem_read_key = np.dot(Wkc.T, np.reshape(dmem_read_gate, (MN, B)))
+    dmem_write_gate = np.reshape(dmem_write_gate, (MN,B))
+    dmem_read_gate = np.reshape(dmem_read_gate, (MN,B))
+
+    for b in range(0,B):
+        dmem_write_key[:,b,None] = np.dot(Wkc[b].T, dmem_write_gate[:,b,None])
+        dmem_read_key[:,b,None] = np.dot(Wkc[b].T, dmem_read_gate[:,b,None])
 
     dWhw += np.dot(np.reshape(dmem_write_key, (MW, B)), hs[t].T)
     dWhr += np.dot(np.reshape(dmem_read_key, (MW,B)), hs[t].T)
