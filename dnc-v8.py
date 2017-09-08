@@ -14,8 +14,8 @@ def dfun_key_simil(C, dsim): return np.dot(C.T, dsim)
 ### parse args
 parser = argparse.ArgumentParser(description='')
 parser.add_argument('--fname', type=str, default = './logs/' + sys.argv[0] + '.dat', help='log filename')
-parser.add_argument('--batchsize', type=int, default = 16, help='batch size')
-parser.add_argument('--hidden', type=int, default = 64, help='hiddens')
+parser.add_argument('--batchsize', type=int, default = 32, help='batch size')
+parser.add_argument('--hidden', type=int, default = 32, help='hiddens')
 parser.add_argument('--seqlength', type=int, default = 25, help='seqlength')
 parser.add_argument('--timelimit', type=int, default = 1000, help='time limit (s)')
 parser.add_argument('--gradcheck', action='store_const', const=True, default=True, help='run gradcheck?')
@@ -116,8 +116,8 @@ by = np.zeros((vocab_size, 1), dtype = datatype) # output bias
 
 # external memory
 read_heads = 1 # paper - R
-MW = 5 # paper - W
-MN = 3 # paper - N
+MW = 15 # paper - W
+MN = 10 # paper - N
 N = HN
 M = vocab_size
 MR = read_heads
@@ -128,7 +128,7 @@ Whr = np.random.randn(MW, HN).astype(datatype)*0.01 # read strength
 Whw = np.random.randn(MW, HN).astype(datatype)*0.01 # write strength
 Whe = np.random.randn(MW, HN).astype(datatype)*0.01 # erase strength
 Wry = np.random.randn(vocab_size, read_heads * MW).astype(datatype)*0.01 # erase strength
-Wkc = np.random.randn(MN,MW)*0.1
+Wkc = np.random.randn(B*MN,MW)*0.1
 
 # i o f c
 # init f gates biases higher
@@ -176,8 +176,8 @@ def lossFun(inputs, targets, cprev, hprev, mprev, rprev, plot=False):
     mem_write_key[t] = np.dot(Whw, hs[t]) # key used for content based read
 
     mem_new_content[t] = np.dot(Whv, hs[t])
-    mem_write_gate[t] = fun_key_simil(Wkc, mem_write_key[t])
-    mem_read_gate[t] = fun_key_simil(Wkc, mem_read_key[t])
+    mem_write_gate[t] = np.dot(Wkc, mem_write_key[t])
+    mem_read_gate[t] = np.dot(Wkc, mem_read_key[t])
     mem_erase_gate[t] = sigmoid(np.dot(Whe, hs[t]))
 
     #softmax on read and write gates
@@ -253,9 +253,9 @@ def lossFun(inputs, targets, cprev, hprev, mprev, rprev, plot=False):
 
     #  dmem_read_key = dmem_read_gate
     dmem_erase_gate = dmem_erase_gate * mem_erase_gate[t] * (1-mem_erase_gate[t])
-    
-    dmem_write_key = dfun_key_simil(Wkc, np.reshape(dmem_write_gate, (MN,B)))
-    dmem_read_key = dfun_key_simil(Wkc, np.reshape(dmem_read_gate, (MN, B)))
+
+    dmem_write_key = np.dot(Wkc.T, np.reshape(dmem_write_gate, (MN,B)))
+    dmem_read_key = np.dot(Wkc.T, np.reshape(dmem_read_gate, (MN, B)))
 
     dWhw += np.dot(np.reshape(dmem_write_key, (MW, B)), hs[t].T)
     dWhr += np.dot(np.reshape(dmem_read_key, (MW,B)), hs[t].T)
